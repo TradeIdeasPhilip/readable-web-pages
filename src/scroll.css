@@ -1,0 +1,9 @@
+[data-scroll="side"] {
+  column-width: 30vw;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  display: block;
+}
+[data-scroll="normal"] {
+  
+}

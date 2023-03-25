@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Top Level</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        width: 100vw;
+        overflow: clip;
+      }
+      div {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .title {
+        font-size: 225%;
+        font-weight: bold;
+        text-align: center;
+        flex-shrink: 0;
+      }
+      .client-area {
+        flex-grow: 1;
+        flex-shrink: 1;
+        border: 0.5em solid blue;
+        border-radius: 1em;
+        position: relative;
+      }
+      .ca1 {
+        border: 0.5em solid cyan;
+        border-radius: 1em;
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+        overflow-y: clip;
+        overflow-x: scroll;
+        box-sizing: border-box;
+        display: block;
+        position: absolute;
+        column-count: 2;
+      }
+      .client-area p {
+        font-size: 150%;
+        text-align: justify;
+      }
+      .toolbar {
+        border: 0.125em outset; /* By default this is 2 pixels, but it will scale with the text. */
+        flex-shrink: 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    </style>
+    <script>
+      function setColumns(c) {
+        document.querySelector(".ca1").style.columnCount= +c;
+      }
+    </script>
+  </head>
+  <body>
+    <div class="title">Top Level</div>
+    <div class="client-area">
+      <div class="ca1">
+        <p>
+          This shows how the css multiple column layout works.
+        </p>
+        <p>
+          The main.html file isn't quite working yet.
+          The biggest problem is that you can't be flex and use columns.
+          I created one <code>&lt;div&gt;</code> inside another to make it work!
+        </p>
+        <p>🅐 One two three four five six seven eight nine ten.</p>
+        <p>🅑 One two three four five six seven eight nine ten.</p>
+        <p>🅒 One two three four five six seven eight nine ten.</p>
+        <p>🅓 One two three four five six seven eight nine ten.</p>
+        <p>🅔 One two three four five six seven eight nine ten.</p>
+        <p>🅕 One two three four five six seven eight nine ten.</p>
+        <p>🅖 One two three four five six seven eight nine ten.</p>
+        <p>🅗 One two three four five six seven eight nine ten.</p>
+        <p>🅘 One two three four five six seven eight nine ten.</p>
+        <p>🅙 One two three four five six seven eight nine ten.</p>
+        <p>🅚 🅛 🅜 🅝 🅞 🅟 One two three four five six seven eight nine ten.</p>
+        <p>🅛 🅜 🅝 🅞 🅟 One two three four five six seven eight nine ten.</p>
+        <p>🅜 🅝 🅞 🅟 One two three four five six seven eight nine ten.</p>
+        <p>🅝 🅞 🅟 One two three four five six seven eight nine ten.</p>
+        <p>🅞 🅟 One two three four five six seven eight nine ten.</p>
+        <p>🅟 One two three four five six seven eight nine ten.</p>
+        <p>🅠 🅡 🅢 🅣 🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
+        <p>🅡 🅢 🅣 🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
+        <p>🅢 🅣 🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
+        <p>🅣 🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
+        <p>🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
+        <p>🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
+        <p>🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
+        <p>🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
+        <p>🅨 🅩 One two three four five six seven eight nine ten.</p>
+        <p>🅩 One two three four five six seven eight nine ten.</p>
+      </div>
+    </div>
+    <div class="toolbar">
+      <button onclick="setColumns(1)">1 Column</button>
+      <button onclick="setColumns(2)">2 Columns</button>
+      <button onclick="setColumns(3)">3 Columns</button>
+      <button onclick="setColumns(4)">4 Columns</button>
+      <button onclick="setColumns(5)">5 Columns</button>
+      <button onclick="setColumns(6)">6 Columns</button>
+      <button onclick="setColumns(7)">7 Columns</button>
+      <button onclick="setColumns(8)">8 Columns</button>
+    </div>
+  </body>
+</html>

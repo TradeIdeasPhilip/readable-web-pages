@@ -1,0 +1,29 @@
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: clip;
+}
+div {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 225%;
+  font-weight: bold;
+  text-align: center;
+  flex-shrink: 0;
+}
+.outside-client-area {
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+.toolbar {
+  border: 0.125em outset;  /* By default this is 2 pixels, but it will scale with the text. */
+  flex-shrink: 0;
+}
+
