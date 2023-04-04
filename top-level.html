@@ -32,6 +32,9 @@
         border-radius: 1em;
         position: relative;
       }
+      .client-area div {
+        column-gap: 1.75em;
+      }
       .ca1 {
         border: 0.5em solid cyan;
         border-radius: 1em;
@@ -59,7 +62,16 @@
         box-sizing: border-box;
         display: block;
         position: absolute;
-        column-width: 20em;
+        column-count: 1;
+      }
+      .column-sizer {
+        border: 0.5em solid darkorange;
+        border-radius: 1em;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        /* right: 67%; */
       }
       .ca2 > * {
         white-space: normal;
@@ -77,37 +89,56 @@
     </style>
     <script>
       function setColumns(c, selector) {
-        document.querySelector(selector).style.columnCount= +c;
+        document.querySelector(selector).style.columnCount = +c;
       }
     </script>
+    <script type="module" src="./src/top-level.ts"></script>
   </head>
   <body>
     <div class="title">Top Level</div>
     <div class="client-area">
       <div class="ca1">
+        <p>This shows how the css multiple column layout works.</p>
         <p>
-          This shows how the css multiple column layout works.
+          The main.html file isn't quite working yet. The biggest problem is
+          that you can't be flex and use columns. I created one
+          <code>&lt;div&gt;</code> inside another to make it work!
         </p>
         <p>
-          The main.html file isn't quite working yet.
-          The biggest problem is that you can't be flex and use columns.
-          I created one <code>&lt;div&gt;</code> inside another to make it work!
+          This first example works pretty well. The one limitation is that the
+          number of columns visible at once must always be an integer. If your
+          container is 30em wide, and you ask for a column-width of 9em or 11em,
+          that will get rounded to 10em to give you exactly 3 columns. (Actually
+          a little less than 10em because of the internal margins.) The second
+          example fixes that.
         </p>
         <p>
-          This first example works pretty well.
-          The one limitation that I'm working on is that the number of columns visible at once must always be an integer.
-          If your container is 30em wide, and you ask for a column-width of 9em or 11em, that will get rounded to 10em
-          to give you exactly 3 columns.
-          (Actually a little less than 10em because of the internal margins.)
-          The second example attempts to fix that.
+          Note: The default of an integer number of columns makes sense
+          <i>if</i> you don't have a scroll bar.
         </p>
         <p>
-          Note: The default of an integer number of columns makes sense <i>if</i> you don't have a scroll bar.
-        </p>
-        <p>
-          The <span style="background-color: blue; color: white; border-radius: 0.5em; padding: 0 0.35em;">blue</span> and <span style="background-color: cyan; color: white; border-radius: 0.5em; padding: 0 0.35em;">cyan</span> borders are temporary.
-          These show the two different <code>&lt;div&gt;</code>'s.
-          They will disappear before production.
+          The
+          <span
+            style="
+              background-color: blue;
+              color: white;
+              border-radius: 0.5em;
+              padding: 0 0.35em;
+            "
+            >blue</span
+          >
+          and
+          <span
+            style="
+              background-color: cyan;
+              color: white;
+              border-radius: 0.5em;
+              padding: 0 0.35em;
+            "
+            >cyan</span
+          >
+          borders are temporary. These show the two different
+          <code>&lt;div&gt;</code>'s. They will disappear before production.
         </p>
         <p>🅐 One two three four five six seven eight nine ten.</p>
         <p>🅑 One two three four five six seven eight nine ten.</p>
@@ -125,8 +156,12 @@
         <p>🅝 🅞 🅟 One two three four five six seven eight nine ten.</p>
         <p>🅞 🅟 One two three four five six seven eight nine ten.</p>
         <p>🅟 One two three four five six seven eight nine ten.</p>
-        <p>🅠 🅡 🅢 🅣 🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
-        <p>🅡 🅢 🅣 🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
+        <p>
+          🅠 🅡 🅢 🅣 🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.
+        </p>
+        <p>
+          🅡 🅢 🅣 🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.
+        </p>
         <p>🅢 🅣 🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
         <p>🅣 🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
         <p>🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
@@ -148,68 +183,83 @@
       <button onclick="setColumns(8, '.ca1')">8 Columns</button>
     </div>
     <div class="client-area">
-      <div class="ca2">
-        <p>
-          This example will let us change the column with to anything.
-          The idea is to make the first column any width that is comfortable to the reader.
-          Then fill the remaining space with additional columns, even if that includes partial columns.
-        </p>
-        <p>
-          This example doesn't work yet.
-          I think I'm close but I want to stop and take a snapshot first.
-        </p>
-        <p>
-          I need to add a third &lt;div&gt; <i>between</i> .client-area and .ca2.
-          This div will be invisible (aside from any temporary debug markings).
-          This div will be the exact size we are requesting for one column.
-          I'll set .ca2 to request one column per page.
-          I'll make sure .client-area clips its overflow, but the two inside do not.
-        </p>
-        <p>
-          This shows how the css multiple column layout works.
-        </p>
-        <p>
-          The main.html file isn't quite working yet.
-          The biggest problem is that you can't be flex and use columns.
-          I created one <code>&lt;div&gt;</code> inside another to make it work!
-        </p>
-        <p>🅐 One two three four five six seven eight nine ten.</p>
-        <p>🅑 One two three four five six seven eight nine ten.</p>
-        <p>🅒 One two three four five six seven eight nine ten.</p>
-        <p>🅓 One two three four five six seven eight nine ten.</p>
-        <p>🅔 One two three four five six seven eight nine ten.</p>
-        <p>🅕 One two three four five six seven eight nine ten.</p>
-        <p>🅖 One two three four five six seven eight nine ten.</p>
-        <p>🅗 One two three four five six seven eight nine ten.</p>
-        <p>🅘 One two three four five six seven eight nine ten.</p>
-        <p>🅙 One two three four five six seven eight nine ten.</p>
-        <p>🅚 🅛 🅜 🅝 🅞 🅟 One two three four five six seven eight nine ten.</p>
-        <p>🅛 🅜 🅝 🅞 🅟 One two three four five six seven eight nine ten.</p>
-        <p>🅜 🅝 🅞 🅟 One two three four five six seven eight nine ten.</p>
-        <p>🅝 🅞 🅟 One two three four five six seven eight nine ten.</p>
-        <p>🅞 🅟 One two three four five six seven eight nine ten.</p>
-        <p>🅟 One two three four five six seven eight nine ten.</p>
-        <p>🅠 🅡 🅢 🅣 🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
-        <p>🅡 🅢 🅣 🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
-        <p>🅢 🅣 🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
-        <p>🅣 🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
-        <p>🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
-        <p>🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
-        <p>🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
-        <p>🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
-        <p>🅨 🅩 One two three four five six seven eight nine ten.</p>
-        <p>🅩 One two three four five six seven eight nine ten.</p>
+      <div class="column-sizer" id="column-sizer">
+        <div class="ca2">
+          <p>
+            This example will let us change the column width to anything. The
+            idea is to make the first column any width that is comfortable to
+            the reader. Then fill the remaining space with additional columns,
+            even if that includes partial columns.
+          </p>
+          <p>
+            I added a third <code>&lt;div&gt;</code> <i>between</i> .client-area
+            and .ca2. This div will be invisible, although it currently has an
+            <span
+              style="
+                background-color: darkorange;
+                color: white;
+                border-radius: 0.5em;
+                padding: 0 0.35em;
+              "
+              >orange</span
+            >
+            outline for debug reasons. This div is called .column-sizer, and we
+            will be the exact size we are requesting for one column.
+          </p>
+          <p>
+            <input type="checkbox" checked id="showBorders" />
+            <label for="showBorders">Show Borders</label>
+          </p>
+          <p>
+            <b>TODO</b> make sure .client-area clips its overflow, but the two
+            inside do not.
+          </p>
+          <p>🅐 One two three four five six seven eight nine ten.</p>
+          <p>🅑 One two three four five six seven eight nine ten.</p>
+          <p>🅒 One two three four five six seven eight nine ten.</p>
+          <p>🅓 One two three four five six seven eight nine ten.</p>
+          <p>🅔 One two three four five six seven eight nine ten.</p>
+          <p>🅕 One two three four five six seven eight nine ten.</p>
+          <p>🅖 One two three four five six seven eight nine ten.</p>
+          <p>🅗 One two three four five six seven eight nine ten.</p>
+          <p>🅘 One two three four five six seven eight nine ten.</p>
+          <p>🅙 One two three four five six seven eight nine ten.</p>
+          <p>🅚 🅛 🅜 🅝 🅞 🅟 One two three four five six seven eight nine ten.</p>
+          <p>🅛 🅜 🅝 🅞 🅟 One two three four five six seven eight nine ten.</p>
+          <p>🅜 🅝 🅞 🅟 One two three four five six seven eight nine ten.</p>
+          <p>🅝 🅞 🅟 One two three four five six seven eight nine ten.</p>
+          <p>🅞 🅟 One two three four five six seven eight nine ten.</p>
+          <p>🅟 One two three four five six seven eight nine ten.</p>
+          <p>
+            🅠 🅡 🅢 🅣 🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine
+            ten.
+          </p>
+          <p>
+            🅡 🅢 🅣 🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.
+          </p>
+          <p>
+            🅢 🅣 🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.
+          </p>
+          <p>🅣 🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
+          <p>🅤 🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
+          <p>🅥 🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
+          <p>🅦 🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
+          <p>🅧 🅨 🅩 One two three four five six seven eight nine ten.</p>
+          <p>🅨 🅩 One two three four five six seven eight nine ten.</p>
+          <p>🅩 One two three four five six seven eight nine ten.</p>
+        </div>
       </div>
     </div>
     <div class="toolbar">
-      <button onclick="setColumns(1, '.ca2')">1 Column</button>
-      <button onclick="setColumns(2, '.ca2')">2 Columns</button>
-      <button onclick="setColumns(3, '.ca2')">3 Columns</button>
-      <button onclick="setColumns(4, '.ca2')">4 Columns</button>
-      <button onclick="setColumns(5, '.ca2')">5 Columns</button>
-      <button onclick="setColumns(6, '.ca2')">6 Columns</button>
-      <button onclick="setColumns(7, '.ca2')">7 Columns</button>
-      <button onclick="setColumns(8, '.ca2')">8 Columns</button>
+      <input
+        id="columnWidthInput"
+        type="range"
+        min="0"
+        max="150"
+        value="36"
+        style="flex-grow: 1"
+      />
+      <div id="columnWidthDiv"></div>
     </div>
   </body>
 </html>
