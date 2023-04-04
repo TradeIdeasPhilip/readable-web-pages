@@ -31,9 +31,10 @@
         border: 0.5em solid blue;
         border-radius: 1em;
         position: relative;
+        margin: 1em;
       }
       .client-area div {
-        column-gap: 1.75em;
+        column-gap: 2em;
       }
       .ca1 {
         border: 0.5em solid cyan;
@@ -86,6 +87,9 @@
         flex-direction: row;
         flex-wrap: wrap;
       }
+      .hide-border {
+        border-width: 0;
+      }
     </style>
     <script>
       function setColumns(c, selector) {
@@ -96,8 +100,8 @@
   </head>
   <body>
     <div class="title">Top Level</div>
-    <div class="client-area">
-      <div class="ca1">
+    <div class="client-area can-hide-border">
+      <div class="ca1 can-hide-border">
         <p>This shows how the css multiple column layout works.</p>
         <p>
           The main.html file isn't quite working yet. The biggest problem is
@@ -182,11 +186,11 @@
       <button onclick="setColumns(7, '.ca1')">7 Columns</button>
       <button onclick="setColumns(8, '.ca1')">8 Columns</button>
     </div>
-    <div class="client-area">
-      <div class="column-sizer" id="column-sizer">
-        <div class="ca2">
+    <div class="client-area can-hide-border">
+      <div class="column-sizer can-hide-border" id="column-sizer">
+        <div class="ca2 can-hide-border">
           <p>
-            This example will let us change the column width to anything. The
+            This example lets us change the column width to anything. The
             idea is to make the first column any width that is comfortable to
             the reader. Then fill the remaining space with additional columns,
             even if that includes partial columns.

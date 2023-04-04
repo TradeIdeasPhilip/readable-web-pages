@@ -16,3 +16,14 @@ function updateColumnWidth() {
 columnWidthInput.addEventListener("input", () => updateColumnWidth());
 
 updateColumnWidth();
+
+
+const showBordersCheckBox = getById("showBorders", HTMLInputElement);
+showBordersCheckBox.addEventListener("input", () => {
+  const showBorders = showBordersCheckBox.checked;
+  const action = showBorders?"remove":"add";
+  const elements = document.querySelectorAll(".can-hide-border");
+  elements.forEach(element => {
+    element.classList[action]("hide-border");
+  })
+})
