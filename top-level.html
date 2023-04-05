@@ -85,6 +85,7 @@
         flex-shrink: 0;
         flex-direction: row;
         flex-wrap: wrap;
+        justify-content: space-around;
       }
       .can-hide-border {
         transition: border-width 2s linear;
@@ -113,14 +114,23 @@
           an integer number of columns to display at once.
         </p>
         <p>
-          The main.html file isn't quite working yet. The biggest problem is
-          that you can't be flex and use columns. I created one
+          The <a href=".">index.html</a> file isn't quite working yet.
+          It attempted to get scrolling working in the obvious way! 
+        </p>
+        <p>
+          This file is a quick and dirty way to get the scrolling working.
+          This uses some css tricks to do things the way I want.
+          When this technique is in better shape I'll try to package it a little better so I can use it in index.html and other places.
+        </p>
+        <p>
+          The biggest problem is
+          that a <code>&lt;div&gt;</code> can't be flex and use columns at the same time. I created one
           <code>&lt;div&gt;</code> inside another to make it work!
         </p>
         <p>
           This first example works pretty well. The one limitation is that the
           number of columns visible at once must always be an integer. If your
-          container is 30em wide, and you ask for a column-width of 9em or 11em,
+          container is 30em wide, and you ask for a <code>column-width</code> of 9em or 11em,
           that will get rounded to 10em to give you exactly 3 columns. (Actually
           a little less than 10em because of the internal margins.) The second
           example fixes that.
@@ -209,8 +219,8 @@
             if that includes partial columns.
           </p>
           <p>
-            I added a third <code>&lt;div&gt;</code> <i>between</i> .client-area
-            and .ca2. This div will be invisible, although it currently has an
+            I added a third <code>&lt;div&gt;</code> <i>between</i> <code>.client-area</code>
+            and <code>.ca2</code>. This <code>&lt;div&gt;</code> will be invisible, although it currently has an
             <span
               style="
                 background-color: darkorange;
@@ -220,16 +230,35 @@
               "
               >orange</span
             >
-            outline for debug reasons. This div is called .column-sizer, and
+            outline for debug reasons. This <code>&lt;div&gt;</code> is called <code>.column-sizer</code>, and
             will be the exact size we are requesting for one column.
           </p>
           <p>
             <input type="checkbox" checked id="showBorders" />
             <label for="showBorders">Show Borders</label>
+            — Leave this checked to understand how everything works.
+            Uncheck it to see what the end user will see.
           </p>
           <p>
-            <b>TODO</b> make sure .client-area clips its overflow, but the two
-            inside do not.
+            Notice that <code>.client-area</code>, the outermost <code>&lt;div&gt;</code>, clips its overflow, but the other two
+            <code>&lt;div&gt;</code>s do not.
+          </p>
+          <p>
+            Use the range control, below, to control the width of the columns.            
+          </p>
+          <p>
+            The range control is crude at best.
+            It's perfect for this prototype, but we'll need something nicer for the end user.
+            For one thing, you probably want the control to be attached to the text you are controlling.
+            Think about changing the margins in MS Word or resizing or moving an image in PowerPoint.
+            The control is right at the edge of what it's controlling.     
+          </p>
+          <p>
+            The range control always chooses an integer numbers of em's for no particular reason.
+            You can set the width of the column based on any units or formulas that you would give to the <code>width</code> of a <code>&lt;div&gt;</code>.
+          </p>
+          <p>
+            <a href="https://github.com/TradeIdeasPhilip/readable-web-pages#readme">More Info</a>
           </p>
           <p>🅐 One two three four five six seven eight nine ten.</p>
           <p>🅑 One two three four five six seven eight nine ten.</p>
