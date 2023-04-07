@@ -14,6 +14,7 @@ export default defineConfig({
         main: resolve(__dirname, "index.html"),
         scratch: resolve(__dirname, "scratch.html"),
         topLevel: resolve(__dirname, "top-level.html"),
+        internalTableOfContents : resolve(__dirname, "internal-table-of-contents.html"),
       },
     },
   },
