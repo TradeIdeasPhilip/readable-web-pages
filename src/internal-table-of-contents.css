@@ -1,3 +1,9 @@
+:root {
+  --foreground-color: black;
+  --background-color: white;
+  color: var(--foreground-color);
+  background-color: var(--background-color);
+}
 .heading,
 .article {
   font-size: 150%;
@@ -45,4 +51,12 @@ body {
   display: block;
   margin-top: 0.25em;
   margin-left: 0.8em;
+}
+.self-pointer {
+  color: var(--foreground-color);
+  background-color: var(--background-color);
+  text-decoration: none;
+}
+.self-pointer:hover > ::after {
+  content: " #";
 }
