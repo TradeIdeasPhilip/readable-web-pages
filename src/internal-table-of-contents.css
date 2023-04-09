@@ -31,7 +31,8 @@ body {
   padding: 0;
   height: 100vh;
   width: 100vw;
-  overflow: clip;
+  overflow-x: clip;
+  overflow-y: auto;
 }
 #toc {
   min-width: 25ch;

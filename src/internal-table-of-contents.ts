@@ -6,6 +6,9 @@ import "./internal-table-of-contents.css";
 const tocDiv = getById("toc", HTMLDivElement);
 const mainDiv = getById("main", HTMLDivElement);
 
+// DEBUG/ugly
+tocDiv.append(`document.body.scrollTop = ${document.body.scrollTop}`);
+
 const initiallyRequestedHash = location.hash;
 let hashPrefix = "";
 Array.from(mainDiv.querySelectorAll(".section, .article, .heading")).forEach(
