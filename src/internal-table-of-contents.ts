@@ -7,21 +7,21 @@ const tocDiv = getById("toc", HTMLDivElement);
 const mainDiv = getById("main", HTMLDivElement);
 
 // DEBUG/ugly
-tocDiv.append(`document.body.scrollTop = ${document.body.scrollTop}`);
+tocDiv.append(`window.pageYOffset = ${window.pageYOffset}`);
 setTimeout(() => {
-  tocDiv.append(`document.body.scrollTop = ${document.body.scrollTop}`);
+  tocDiv.append(`window.pageYOffset = ${window.pageYOffset}`);
 }, 1000);
 setTimeout(() => {
-  document.body.scroll(0, 0);
-  tocDiv.append(`document.body.scrollTop = ${document.body.scrollTop}`);
+  window.scrollTo(0, 0);
+  tocDiv.append(`window.pageYOffset = ${window.pageYOffset}`);
 }, 2000);
 setTimeout(() => {
-  document.body.scroll(0, 1);
-  tocDiv.append(`document.body.scrollTop = ${document.body.scrollTop}`);
+  window.scrollTo(0, 1);
+  tocDiv.append(`window.pageYOffset = ${window.pageYOffset}`);
 }, 3000);
 setTimeout(() => {
-  document.body.scroll(0, 0);
-  tocDiv.append(`document.body.scrollTop = ${document.body.scrollTop}`);
+  window.scrollTo(0, 0);
+  tocDiv.append(`window.pageYOffset = ${window.pageYOffset}`);
 }, 4000);
 
 const initiallyRequestedHash = location.hash;
