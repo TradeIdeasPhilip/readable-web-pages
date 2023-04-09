@@ -4,6 +4,14 @@
   color: var(--foreground-color);
   background-color: var(--background-color);
 }
+.title {
+  font-size: 225%;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  margin-bottom: 0.5em;
+  text-shadow: 0.1em 0.125em lightgray;
+}
 .heading,
 .article {
   font-size: 150%;
@@ -51,6 +59,9 @@ body {
   display: block;
   margin-top: 0.25em;
   margin-left: 0.8em;
+}
+.toc-selected {
+  background-color: lightcyan;
 }
 .self-pointer {
   color: var(--foreground-color);
