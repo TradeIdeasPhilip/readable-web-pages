@@ -8,6 +8,9 @@ const mainDiv = getById("main", HTMLDivElement);
 
 // DEBUG/ugly
 tocDiv.append(`document.body.scrollTop = ${document.body.scrollTop}`);
+setTimeout(() => {
+  tocDiv.append(`document.body.scrollTop = ${document.body.scrollTop}`);
+}, 1000);
 
 const initiallyRequestedHash = location.hash;
 let hashPrefix = "";
