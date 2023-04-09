@@ -11,6 +11,18 @@ tocDiv.append(`document.body.scrollTop = ${document.body.scrollTop}`);
 setTimeout(() => {
   tocDiv.append(`document.body.scrollTop = ${document.body.scrollTop}`);
 }, 1000);
+setTimeout(() => {
+  document.body.scroll(0, 0);
+  tocDiv.append(`document.body.scrollTop = ${document.body.scrollTop}`);
+}, 2000);
+setTimeout(() => {
+  document.body.scroll(0, 1);
+  tocDiv.append(`document.body.scrollTop = ${document.body.scrollTop}`);
+}, 3000);
+setTimeout(() => {
+  document.body.scroll(0, 0);
+  tocDiv.append(`document.body.scrollTop = ${document.body.scrollTop}`);
+}, 4000);
 
 const initiallyRequestedHash = location.hash;
 let hashPrefix = "";
