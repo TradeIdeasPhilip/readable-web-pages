@@ -6,6 +6,29 @@ import "./internal-table-of-contents.css";
 const tocDiv = getById("toc", HTMLDivElement);
 const mainDiv = getById("main", HTMLDivElement);
 
+/*
+  I never quite got this to work.  I've done similar things in the past,
+  and I copied this off stack overflow.  There's probably something specific about
+  this css file or something that's breaking this.
+  
+  The goal is to automatically get rid of the address bar on a mobile browser.
+  Normally the user can drag up, like scrolling the document up, and that will
+  also remove the address bar.  If you're clever sometimes you can simulate
+  that action with JavaScript so the user doesn't have to do anything.
+
+  One promising suggestion on the web was to look into the full screen API
+  https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API
+  TODO look into that.
+
+  For now I'm making the body 100vh tall and setting the body's scroll-y to auto.
+  So the scroll bar will disappear and be disabled most of the time.  But if the
+  address bar is present, then the user can scroll to get rid of it.
+
+  It's not perfect.  Especially when mixed with other scrolling elements.
+  (sometimes I have to try to grab the margin between the table of contents and
+  the main panel to make the <body> scroll.)  But it should be good enough for
+  now.
+
 // DEBUG/ugly
 tocDiv.append(`window.pageYOffset = ${window.pageYOffset}`);
 setTimeout(() => {
@@ -23,6 +46,7 @@ setTimeout(() => {
   window.scrollTo(0, 0);
   tocDiv.append(`window.pageYOffset = ${window.pageYOffset}`);
 }, 4000);
+*/
 
 const initiallyRequestedHash = location.hash;
 let hashPrefix = "";
