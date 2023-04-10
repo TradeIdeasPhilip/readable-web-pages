@@ -35,7 +35,7 @@ body {
   overflow-y: auto;
 }
 #toc {
-  min-width: 25ch;
+  min-width: 15ch;
   margin: 0.8em;
   overflow-y: auto;
 }
@@ -71,4 +71,9 @@ body {
 }
 .self-pointer:hover > ::after {
   content: " #";
+}
+@media (pointer: coarse) {
+  button {
+    font-size: 225%;
+  }
 }
