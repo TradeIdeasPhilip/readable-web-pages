@@ -29,6 +29,9 @@ const mainDiv = getById("main", HTMLDivElement);
   the main panel to make the <body> scroll.)  But it should be good enough for
   now.
 
+  A copied a lot of this code from here:
+  https://codepen.io/akikoo/pen/AWXrOP?editors=1111
+
 // DEBUG/ugly
 tocDiv.append(`window.pageYOffset = ${window.pageYOffset}`);
 setTimeout(() => {
