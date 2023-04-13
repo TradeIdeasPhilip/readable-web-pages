@@ -73,7 +73,7 @@ Array.from(mainDiv.querySelectorAll(".section, .article, .heading")).forEach(
       tocA.classList.add(tocClass);
       /**
        * I think "name" was the name of an attribute of an anchor in html 4, but now you use the id attribute instead.
-       * 
+       *
        * This will be the value of the fragment, the part of the url found after the #.
        */
       let name = element.dataset.name;
@@ -126,3 +126,21 @@ function updateTocSelection() {
 window.addEventListener("hashchange", () => updateTocSelection());
 
 updateTocSelection();
+
+let fontSize = 0;
+
+function setFontSize() {
+  const percent = Math.pow(1.15, fontSize) * 100;
+  const size = percent + "%";
+  document.body.style.fontSize = size;
+}
+
+getById("biggerFont", HTMLButtonElement).addEventListener("click", () => {
+  fontSize++;
+  setFontSize();
+});
+
+getById("smallerFont", HTMLButtonElement).addEventListener("click", () => {
+  fontSize--;
+  setFontSize();
+});
