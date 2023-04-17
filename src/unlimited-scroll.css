@@ -1,0 +1,80 @@
+:root {
+  --foreground-color: black;
+  --background-color: white;
+  color: var(--foreground-color);
+  background-color: var(--background-color);
+}
+.title {
+  font-size: 225%;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  margin-bottom: 0.5em;
+  text-shadow: 0.1em 0.125em lightgray;
+}
+.heading,
+.article {
+  font-size: 150%;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.section {
+  margin-top: 0.5em;
+  font-size: 125%;
+  font-style: italic;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: clip;
+  overflow-y: auto;
+}
+#toc {
+  /*min-width: 15ch;*/
+  margin: 0.8em;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+#main {
+  flex-grow: 1;
+  margin: 0.8em;
+  overflow-y: auto;
+}
+.toc-1 {
+  font-size: 125%;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  display: block;
+  margin-top: 0.5em;
+}
+.toc-1:first-child {
+  margin-top: 0;
+}
+.toc-2 {
+  font-style: italic;
+  font-family: Arial, Helvetica, sans-serif;
+  display: block;
+  margin-top: 0.25em;
+  margin-left: 0.8em;
+}
+.toc-selected {
+  background-color: lightcyan;
+}
+.self-pointer {
+  color: var(--foreground-color);
+  background-color: var(--background-color);
+  text-decoration: none;
+}
+.self-pointer:hover > ::after {
+  content: " #";
+}
+@media (pointer: coarse) {
+  button {
+    font-size: 225%;
+  }
+}

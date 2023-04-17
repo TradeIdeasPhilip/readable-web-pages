@@ -15,6 +15,7 @@ export default defineConfig({
         scratch: resolve(__dirname, "scratch.html"),
         topLevel: resolve(__dirname, "top-level.html"),
         internalTableOfContents : resolve(__dirname, "internal-table-of-contents.html"),
+        unlimitedScroll : resolve(__dirname, "unlimited-scroll.html"),
       },
     },
   },
