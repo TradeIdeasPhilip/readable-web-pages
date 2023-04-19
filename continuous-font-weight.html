@@ -7,12 +7,39 @@
     <script type="module" src="./src/continuous-font-weight.ts"></script>
   </head>
   <body>
-    <div class="constant-wave">X X X<span class="constant-wave">O</span></div>
-    <div class="pulses">XXXXX<span class="pulses">O</span></div>
-    <!--
+    <div>
+      The <a href="https://fonts.google.com/specimen/Source+Code+Pro/tester?query=source+code+pro">Source Code Pro</a>
+      font gives you a lot of control over the font-weight property.  I'm doing some tests to see how well I can animate 
+      that property.  It's a little trickier than it should be, but it's basically working.
+    </div>
+    <br>
+    <div class="big-sample">
+      <div class="constant-wave">X X X<span class="constant-wave">O</span></div>
+      <div class="pulses">XXXXX<span class="pulses">O</span></div>
+    </div>
+    <div id="insertSamplesHere"></div>
+    <!-- I was trying to see way things were scaling oddly.  
+      50% does *not* make then text half as wide.
+      The results vary between my phone and my computer. 
     <div>|X<span style="font-size: 50%">YY<span style="font-size: 50%;">ZZZZ</span></span>|</div>
     <div>|<span style="font-size: 50%">YY<span style="font-size: 50%;">ZZZZ</span></span>X|</div>
     <div>|<span style="font-size: 50%"><span style="font-size: 50%;">ZZZZ</span>YY</span>X|</div>
     -->
+    <br />
+    <div>
+      Source:
+      <a
+        href="https://github.com/TradeIdeasPhilip/readable-web-pages/blob/master/continuous-font-weight.html"
+        >HTML</a
+      >,
+      <a
+        href="https://github.com/TradeIdeasPhilip/readable-web-pages/blob/master/src/continuous-font-weight.css"
+        >CSS</a
+      >,
+      <a
+        href="https://github.com/TradeIdeasPhilip/readable-web-pages/blob/master/src/continuous-font-weight.ts"
+        >TypeScript</a
+      >
+    </div>
   </body>
 </html>

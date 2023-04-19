@@ -1,8 +1,21 @@
+/* This works decently but is not perfect.  We are importing exactly the font weights listed below.
+ * If you try to ask for a font weight of 275 the browser will round that to 250 or 300.
+ * The font itself can support 275 and it will be different from 274 and 276.  But I'm only exposing
+ * the values listed here.  It does a pretty good job, but I'd rather expose all legal values.
+ */
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200;250;300;350;400;450;500;550;600;650;700;750;800;850;900&display=swap");
+
+/* This only gives you normal and bold. */
 /*
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
 */
 
+/* This didn't work well.  I started by going to https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200;250;300;350;400;450;500;550;600;650;700;750;800;850;900&display=swap
+ * to see what Google was giving me.  Each font weight that I requested would return a block similar to this.
+ * The url was the same for every line and only the font-weight was different for each one.  According to MDN specifying
+ * two values for the font-weight should give you a range, like I want.  But I couldn't get it to even load the font
+ * at all.
+ */
 /*
 @font-face {
   font-family: 'Source Code Pro';
@@ -13,6 +26,12 @@
 }
 */
 
+/* This is similar to above, with one change.  I the src url above came from typing the Google API request into
+ * Chrome's address bar.  However, when I @import the Google API request, it gives me a different URL. 
+ * I copied this URL from the Chrome debugger's network tab.  Just like the previous attempt, I couldn't see the
+ * requested font at all.  I only saw the fallback font.  I set the fallback font to "serif" to make is very
+ * obvious when the correct font didn't change.
+ */
 /*
 @font-face {
   font-family: 'Source Code Pro';
@@ -25,7 +44,13 @@
 
 body {
   font-family: "Source Code Pro", serif;
+}
+.big-sample {
   font-size: 300%;
+}
+#insertSamplesHere {
+  white-space: nowrap;
+  overflow-x: auto;
 }
 .constant-wave {
   animation: constant-wave 3s ease-in-out infinite;
