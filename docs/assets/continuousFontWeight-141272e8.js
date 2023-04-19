@@ -1,1 +1,0 @@
-import"./modulepreload-polyfill-3cfb730f.js";for(let e=200;e<=900;e+=50){const t=document.createElement("div"),n=(e||1).toString();t.style.fontWeight=n,t.style.fontSize="33.333%",t.innerText=`* \\-/| div.style.fontWeight = ${n}`,document.body.appendChild(t)}

@@ -1,0 +1,1 @@
+import"./modulepreload-polyfill-3cfb730f.js";import{g as o}from"./client-misc-b2f58c4c.js";const i=o("insertSamplesHere",HTMLDivElement);for(let e=200;e<=900;e+=50){const t=document.createElement("div"),n=(e||1).toString();t.style.fontWeight=n,t.innerText=`font-weight: ${n}; * \\-/| The quick brown fox jumps over the lazy dog!`,i.appendChild(t)}
