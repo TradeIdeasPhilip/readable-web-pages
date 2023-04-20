@@ -1,6 +1,11 @@
 import { getById } from "phil-lib/client-misc";
 import "./continuous-font-weight.css";
-import { initializedArray, makeBoundedLinear, makeLinear } from "phil-lib/misc";
+import {
+  assertClass,
+  initializedArray,
+  makeBoundedLinear,
+  makeLinear,
+} from "phil-lib/misc";
 
 {
   const insertSamplesHere = getById("insertSamplesHere", HTMLDivElement);
@@ -70,6 +75,17 @@ getById("redrawGradient", HTMLButtonElement).addEventListener("click", () =>
 );
 
 {
+  let animationName = "";
+  document.querySelectorAll('input[name="antiAliasing"]').forEach((element) => {
+    const input = assertClass(element, HTMLInputElement);
+    input.addEventListener("click", () => {
+      animationName = input.id;
+    });
+    if (input.checked) {
+      animationName = input.id;
+    }
+  });
+
   const antiAliasingDiv = getById("antiAliasing", HTMLDivElement);
   const width = 70;
   const height = 30;
@@ -103,13 +119,50 @@ getById("redrawGradient", HTMLButtonElement).addEventListener("click", () =>
     }
   }
   (window as any).drawAntiAliasing = drawAntiAliasing;
+  function drawCircle(radius: number) {
+    const centerX = width / 2;
+    const centerY = height / 2;
+    /**
+     * The input radius should always be in a range from 0 to 1.
+     * 1 means as big as the container.  If the container is not a
+     * square I'm (somewhat arbitrarily) picking something half way
+     * between the two dimensions.
+     */
+    const maxRadiusInPixels =
+      (antiAliasingDiv.offsetWidth + antiAliasingDiv.offsetHeight) / 4;
+    const characterWidthInPixels = antiAliasingDiv.offsetWidth / width;
+    const characterHeightInPixels = antiAliasingDiv.offsetHeight / height;
+    const characterSizeInPixels =
+      (characterHeightInPixels + characterWidthInPixels) / 2;
+    //const characterAspectRatio = characterWidth / characterHeight;
+    for (let columnNumber = 0; columnNumber < width; columnNumber++) {
+      for (let rowNumber = 0; rowNumber < height; rowNumber++) {
+        const distanceFromCenter = Math.hypot(
+          (columnNumber - centerX) * characterWidthInPixels,
+          (rowNumber - centerY) * characterHeightInPixels
+        );
+        const span = cells[columnNumber][rowNumber];
+        const distanceOutsideInPixels =
+          radius * maxRadiusInPixels - distanceFromCenter;
+        span.style.fontWeight = getFontWeight(
+          distanceOutsideInPixels / characterSizeInPixels
+        ).toString();
+      }
+    }
+  }
+  (window as any).drawCircle = drawCircle;
   function startAnimation() {
     requestAnimationFrame((ms) => {
       startAnimation();
-      drawAntiAliasing(
-        Math.sin(ms / 1000) / 2 + 0.5,
-        Math.cos(ms / 1000) / 2 + 0.5
-      );
+      switch (animationName) {
+        case "Waves": {
+          drawAntiAliasing(
+            Math.sin(ms / 1000) / 2 + 0.5,
+            Math.cos(ms / 1000) / 2 + 0.5
+          );
+          break;
+        }
+      }
     });
   }
   startAnimation();
