@@ -13,8 +13,9 @@ import { makeLinear } from "phil-lib/misc";
   }
 }
 
-{
+function drawGradient() {
   const randomGradientDiv = getById("randomGradient", HTMLDivElement);
+  randomGradientDiv.innerText = "";
   const width = 70;
   const height = 30;
   const minWeight = 200;
@@ -38,6 +39,7 @@ import { makeLinear } from "phil-lib/misc";
       idealWeight - minWeight,
       maxWeight - idealWeight
     );
+    /*
     console.log({
       rowNumber,
       idealWeight,
@@ -45,6 +47,7 @@ import { makeLinear } from "phil-lib/misc";
       max: idealWeight + roomToChange,
       min: idealWeight - roomToChange,
     });
+    */
     const randomToWeight = makeLinear(
       0,
       idealWeight - roomToChange,
@@ -59,3 +62,7 @@ import { makeLinear } from "phil-lib/misc";
     }
   }
 }
+
+drawGradient();
+
+getById("redrawGradient", HTMLButtonElement).addEventListener("click", () => drawGradient());
