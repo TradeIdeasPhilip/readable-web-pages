@@ -1,6 +1,6 @@
 import { getById } from "phil-lib/client-misc";
 import "./continuous-font-weight.css";
-import { makeLinear } from "phil-lib/misc";
+import { initializedArray, makeBoundedLinear, makeLinear } from "phil-lib/misc";
 
 {
   const insertSamplesHere = getById("insertSamplesHere", HTMLDivElement);
@@ -65,4 +65,52 @@ function drawGradient() {
 
 drawGradient();
 
-getById("redrawGradient", HTMLButtonElement).addEventListener("click", () => drawGradient());
+getById("redrawGradient", HTMLButtonElement).addEventListener("click", () =>
+  drawGradient()
+);
+
+{
+  const antiAliasingDiv = getById("antiAliasing", HTMLDivElement);
+  const width = 70;
+  const height = 30;
+  /**
+   * The first index is column number.  The second index is the row number.
+   */
+  const cells = initializedArray(width, () => [] as HTMLSpanElement[]);
+  for (let rowNumber = 0; rowNumber < height; rowNumber++) {
+    const div = document.createElement("div");
+    antiAliasingDiv.appendChild(div);
+    for (let columnNumber = 0; columnNumber < width; columnNumber++) {
+      const span = document.createElement("span");
+      div.appendChild(span);
+      cells[columnNumber].push(span);
+      span.innerText = "X";
+    }
+  }
+  const getFontWeight = makeBoundedLinear(0, 200, 1, 900);
+  function drawAntiAliasing(leftHeight: number, rightHeight: number) {
+    leftHeight *= height;
+    rightHeight *= height;
+    const getColumnHeight = makeLinear(0, leftHeight, width - 1, rightHeight);
+    for (let columnNumber = 0; columnNumber < width; columnNumber++) {
+      const columnHeight = getColumnHeight(columnNumber);
+      //console.log({columnNumber, columnHeight})
+      for (let rowNumber = 0; rowNumber < height; rowNumber++) {
+        cells[columnNumber][rowNumber].style.fontWeight = getFontWeight(
+          rowNumber - columnHeight + 1
+        ).toString();
+      }
+    }
+  }
+  (window as any).drawAntiAliasing = drawAntiAliasing;
+  function startAnimation() {
+    requestAnimationFrame((ms) => {
+      startAnimation();
+      drawAntiAliasing(
+        Math.sin(ms / 1000) / 2 + 0.5,
+        Math.cos(ms / 1000) / 2 + 0.5
+      );
+    });
+  }
+  startAnimation();
+}
