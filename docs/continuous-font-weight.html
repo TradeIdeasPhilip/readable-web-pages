@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Continuous Font Weight</title>
     
-    <script type="module" crossorigin src="./assets/continuousFontWeight-abdcc847.js"></script>
+    <script type="module" crossorigin src="./assets/continuousFontWeight-ffee3773.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/modulepreload-polyfill-3cfb730f.js">
     <link rel="modulepreload" crossorigin href="./assets/client-misc-6b99d9da.js">
-    <link rel="stylesheet" href="./assets/continuous-font-weight-e9696fb3.css">
+    <link rel="stylesheet" href="./assets/continuous-font-weight-93c870b2.css">
   </head>
   <body>
-    <div>
+    <div class="help">
       The
       <a
         href="https://fonts.google.com/specimen/Source+Code+Pro/tester?query=source+code+pro"
@@ -22,9 +22,26 @@
       trickier than it should be, but it's basically working.
     </div>
     <br />
+    <div class="help">
+      This first example shows what happens when you change the font-weight
+      property continuously. The X's and the O's both change the same amount.
+      The O's move at the same pace as the font changes, to make it more clear
+      what is going on. The two rows move at different paces just to see how the
+      effect looks.
+    </div>
     <div class="big-sample">
       <div class="constant-wave">X X X<span class="constant-wave">O</span></div>
       <div class="pulses">XXXXX<span class="pulses">O</span></div>
+    </div>
+    <br />
+    <div class="help">
+      This next example shows multiple font weights without animation. Currently
+      I'm <i>only</i> importing these exact font weights from the Google Fonts
+      API. I should be able to import <i>all</i> weights, but I can't figure out
+      how to do that. If I add twice as many rows to <i>this fixed</i> example,
+      you can see the limitation clearly. However, in the
+      <i>animation</i> example it's hard to tell that the font-weight is not
+      changing continuously.
     </div>
     <div id="insertSamplesHere"></div>
     <!-- I was trying to see way things were scaling oddly.  
@@ -35,14 +52,29 @@
     <div>|<span style="font-size: 50%"><span style="font-size: 50%;">ZZZZ</span>YY</span>X|</div>
     -->
     <br />
-    <div><a id="anti_aliasing"></a>Anti-Aliasing</div>
+    <div class="help">
+      <a id="anti_aliasing"></a>This next example uses the font-weight property
+      to add <b>Anti-Aliasing</b> to ASCII art. I'm currently using all X's for
+      simplicity. I can imagine drawing a grayscale picture using the
+      font-weight attribute. Normally people use different characters to draw
+      ASCII art in different shades of (simulated) gray. Using the font-weight
+      would allow me to pick any characters I wanted; in particular I might use
+      some text that is relevant to the picture.
+    </div>
     <div id="antiAliasing"></div>
+    <div class="help">
+      I draw the "Waves" example by directly setting the font-weight of each
+      character. That was a pain to code, so in the "Circles" example I first
+      draw to the canvas then copy the contents of the canvas to the X's. Now I
+      can use <i>any</i> method of drawing on a canvas to get this effect. E.g.
+      loading pictures from JPEG files, reading individual frames from a video,
+      rendering a 3d animation with the ThreeJS library, etc.
+    </div>
     <div>
-      <input type="radio" name="antiAliasing" id="Waves" checked /><label
-        for="Waves"
+      <input type="radio" name="antiAliasing" id="Waves" /><label for="Waves"
         >Waves</label
       >
-      <input type="radio" name="antiAliasing" id="Circles" /><label
+      <input type="radio" name="antiAliasing" id="Circles" checked /><label
         for="Circles"
         >Circles</label
       >
@@ -50,12 +82,18 @@
         >Paused</label
       >
     </div>
+    <div class="help">
+      I'm displaying these two canvasses only for debug reasons. The first shows
+      one large square for each X on the screen. The second is scaled so the
+      oversized pixels have the same aspect ratio as the X's. In production code
+      you'd only need one canvas, and there is no need to display it.
+    </div>
     <div>
       <canvas id="antiAliasingMainCanvas"></canvas>
       <canvas id="antiAliasingDuplicateCanvas"></canvas>
     </div>
     <br />
-    <div>Random(ish) Gradient</div>
+    <div class="help">Random(ish) Gradient</div>
     <div id="randomGradient"></div>
     <div><button id="redrawGradient">Redraw</button></div>
     <br />

@@ -8,6 +8,7 @@ import {
 } from "phil-lib/misc";
 
 {
+  // Static samples.  No animation.
   const insertSamplesHere = getById("insertSamplesHere", HTMLDivElement);
   for (let fontWeight = 200; fontWeight <= 900; fontWeight += 50) {
     const div = document.createElement("div");
@@ -23,7 +24,13 @@ function drawGradient() {
   randomGradientDiv.innerText = "";
   const width = 70;
   const height = 30;
+  /**
+   * This comes from the font.  TODO make this a global variable.
+   */
   const minWeight = 200;
+  /**
+   * This comes from the font.  TODO make this a global variable.
+   */
   const maxWeight = 900;
   /**
    * How many lines to skip at the top and bottom.
@@ -53,6 +60,11 @@ function drawGradient() {
       min: idealWeight - roomToChange,
     });
     */
+    /**
+     * Pick a font-weight.  The input is the _ideal_ font weight.
+     * This adds some randomness.  This returns a random value with
+     * an average matching the input.  But the value will never be out of range.
+     */
     const randomToWeight = makeLinear(
       0,
       idealWeight - roomToChange,
@@ -74,20 +86,29 @@ getById("redrawGradient", HTMLButtonElement).addEventListener("click", () =>
   drawGradient()
 );
 
+/**
+ * This section draws a couple of animated examples which use the font-weight to render a
+ * grayscale image.  I'm using anti-aliasing as a simple way to create a series of images.
+ */
 {
+  /** This is the animation that the user selected with a radio button. */
   let animationName = "";
   document.querySelectorAll('input[name="antiAliasing"]').forEach((element) => {
     const input = assertClass(element, HTMLInputElement);
+    // Change the animationName whenever a user clicks a radio button.
     input.addEventListener("click", () => {
       animationName = input.id;
     });
+    // And read the initial value from the HTML file to initialize animationName.
     if (input.checked) {
       animationName = input.id;
     }
   });
 
   const antiAliasingDiv = getById("antiAliasing", HTMLDivElement);
+  /** How many X's across. */
   const width = 70;
+  /** How many X's high. */
   const height = 30;
   /**
    * The first index is column number.  The second index is the row number.
@@ -103,8 +124,19 @@ getById("redrawGradient", HTMLButtonElement).addEventListener("click", () =>
       span.innerText = "X";
     }
   }
+  /**
+   * Internally we use a value of 0 for white and 1 for black.
+   * The Source Code Pro font supports values from 200 to 900.
+   * (The standard allows for values from 1 to 1,000, but this font will not draw anything interesting at those extremes.)
+   * This function converts from the internal value to the font-weight value.
+   */
   const getFontWeight = makeBoundedLinear(0, 200, 1, 900);
-  function drawAntiAliasing(leftHeight: number, rightHeight: number) {
+  /**
+   * Draw a single frame of the "Wave" demo.
+   * @param leftHeight Where the line hits the left wall.  The range [0, 1] covers the entire visible area, however you can set this higher or lower.
+   * @param rightHeight Where the line hits the right wall.  The range [0, 1] covers the entire visible area, however you can set this higher or lower.
+   */
+  function drawWaveSample(leftHeight: number, rightHeight: number) {
     leftHeight *= height;
     rightHeight *= height;
     const getColumnHeight = makeLinear(0, leftHeight, width - 1, rightHeight);
@@ -118,7 +150,7 @@ getById("redrawGradient", HTMLButtonElement).addEventListener("click", () =>
       }
     }
   }
-  (window as any).drawAntiAliasing = drawAntiAliasing;
+  (window as any).drawAntiAliasing = drawWaveSample;
   const antiAliasingMainCanvas = getById(
     "antiAliasingMainCanvas",
     HTMLCanvasElement
@@ -129,6 +161,12 @@ getById("redrawGradient", HTMLButtonElement).addEventListener("click", () =>
   );
   antiAliasingMainCanvas.getContext("2d")!.imageSmoothingEnabled = false;
   antiAliasingDuplicateCanvas.getContext("2d")!.imageSmoothingEnabled = false;
+  /**
+   * Draw a circle in the center of the sample.
+   * @param radius 0 for nothing.  1 for the largest circle that will fit.
+   * Fractions are allowed.  Larger values are allowed, but part of the circle
+   * will be cut off.
+   */
   function drawCircle(radius: number) {
     const centerX = width / 2;
     const centerY = height / 2;
@@ -223,7 +261,7 @@ getById("redrawGradient", HTMLButtonElement).addEventListener("click", () =>
       startAnimation();
       switch (animationName) {
         case "Waves": {
-          drawAntiAliasing(
+          drawWaveSample(
             Math.sin(ms / 1000) / 2 + 0.5,
             Math.cos(ms / 1000) / 2 + 0.5
           );
@@ -234,8 +272,10 @@ getById("redrawGradient", HTMLButtonElement).addEventListener("click", () =>
           const numberOfCompleteCycles = Math.floor(numberOfCycles);
           const partOfCurrentCycle = numberOfCycles - numberOfCompleteCycles;
           if (numberOfCompleteCycles % 2) {
+            // The circle is growing
             drawCircle(partOfCurrentCycle);
           } else {
+            // The circle is shrinking.
             drawCircle(1 - partOfCurrentCycle);
           }
           break;

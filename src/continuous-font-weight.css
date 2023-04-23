@@ -103,3 +103,9 @@ div.constant-wave::after {
 canvas {
   border: lightblue ridge 2px;
 }
+.help {
+  color: blue;
+  margin-left: 1em;
+  margin-right: 1em;
+  text-align: justify;
+}
