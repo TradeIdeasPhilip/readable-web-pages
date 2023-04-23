@@ -226,6 +226,8 @@ getById("redrawGradient", HTMLButtonElement).addEventListener("click", () =>
     antiAliasingDuplicateCanvas
       .getContext("2d")!
       .drawImage(antiAliasingMainCanvas, 0, 0);
+    // I get the following warning at the next line:
+    // continuous-font-weight.ts:222 Canvas2D: Multiple readback operations using getImageData are faster with the willReadFrequently attribute set to true. See: https://html.spec.whatwg.org/multipage/canvas.html#concept-canvas-will-read-frequently
     const pixelValues = mainContext.getImageData(0, 0, width, height).data;
     let pixelValueIndex = 0;
     const pixelValueToFontWeight = makeLinear(0, 900, 255, 200);
@@ -284,4 +286,55 @@ getById("redrawGradient", HTMLButtonElement).addEventListener("click", () =>
     });
   }
   startAnimation();
+}
+
+{
+  // This is the karaoke example.
+  const lyricsDiv = getById("lyricsDiv", HTMLDivElement);
+  // You could make the gradient smoother by doing it letter by letter instead of word by word.
+  const words = lyricsDiv.innerText.split(/\s+/g);
+  lyricsDiv.innerText = "";
+  /**
+   * One of these per word.  Index 0 is the first word.
+   */
+  const spans: HTMLSpanElement[] = [];
+  words.forEach((word) => {
+    if (word == "¶" || word == "§") {
+      lyricsDiv.appendChild(document.createElement("br"));
+    } else {
+      lyricsDiv.append(" ");
+      const span = document.createElement("span");
+      span.innerText = word;
+      spans.push(span);
+      lyricsDiv.appendChild(span);
+    }
+  });
+  (window as any).spans = spans;
+  const needsCleanup: HTMLSpanElement[] = [];
+  const lyricsSlider = getById("lyricsSlider", HTMLInputElement);
+  lyricsSlider.min = "0";
+  lyricsSlider.value = lyricsSlider.max = (spans.length - 1).toString();
+  const numberOfWordsToHighlight = 7;
+  const offsetToWeight = makeBoundedLinear(
+    0,
+    900,
+    numberOfWordsToHighlight,
+    200
+  ); // TODO see note above about using constants instead of 900 and 200.
+  const updateCurrent = () => {
+    needsCleanup.forEach((span) => (span.style.fontWeight = ""));
+    needsCleanup.length = 0;
+    const selectedIndex = spans.length - +lyricsSlider.value - 1;
+    for (let offset = 0; offset < numberOfWordsToHighlight; offset++) {
+      const current = spans[selectedIndex + offset];
+      if (!current) {
+        // Past the end of the document.  This is not an error.
+        break;
+      }
+      needsCleanup.push(current);
+      current.style.fontWeight = offsetToWeight(offset).toString();
+    }
+  };
+  lyricsSlider.addEventListener("input", updateCurrent);
+  updateCurrent();
 }

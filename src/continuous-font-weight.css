@@ -109,3 +109,10 @@ canvas {
   margin-right: 1em;
   text-align: justify;
 }
+#lyricsDiv {
+  font-weight: 200;
+}
+.lyrics-container {
+  display: flex;
+  flex-direction: row;
+}

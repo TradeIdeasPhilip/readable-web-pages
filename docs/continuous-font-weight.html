@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Continuous Font Weight</title>
     
-    <script type="module" crossorigin src="./assets/continuousFontWeight-ffee3773.js"></script>
+    <script type="module" crossorigin src="./assets/continuousFontWeight-8e714976.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/modulepreload-polyfill-3cfb730f.js">
     <link rel="modulepreload" crossorigin href="./assets/client-misc-6b99d9da.js">
-    <link rel="stylesheet" href="./assets/continuous-font-weight-93c870b2.css">
+    <link rel="stylesheet" href="./assets/continuous-font-weight-45de8b2c.css">
   </head>
   <body>
     <div class="help">
@@ -91,6 +91,64 @@
     <div>
       <canvas id="antiAliasingMainCanvas"></canvas>
       <canvas id="antiAliasingDuplicateCanvas"></canvas>
+    </div>
+    <br />
+    <div class="help">
+      This next example could be used in a karaoke machine.
+      I'm highlighting the words that you should be singing right now.
+      I don't actually have access to the music, so in this example you'll have to adjust the slider yourself.
+      I suggest clicking on the slider and then using the up and down arrows to move the highlight.
+    </div>
+    <!-- 
+            Note:  I got this warning from Chrome:
+            The keyword 'slider-vertical' specified to an 'appearance' property is not standardized. It will be removed in the future.
+            The internet suggests that a vertical slider is not quite ready for prime time,
+            yet.  It's a custom thing that's different in different browsers and hasn't been 
+            standardized yet.
+           -->
+    <div class="lyrics-container">
+      <input
+        id="lyricsSlider"
+        type="range"
+        orient="vertical"
+        style="appearance: slider-vertical; width: 3em"
+      />
+
+      <div id="lyricsDiv">
+        Riding on the City of New Orleans ¶ Illinois Central, Monday morning
+        rail ¶ Fifteen cars and fifteen restless riders ¶ Three conductors and
+        twenty-five sacks of mail ¶ All along the southbound odyssey ¶ The train
+        pulls out at Kankakee ¶ Rolls along past houses, farms and fields ¶
+        Passin' trains that have no name ¶ Freight yards full of old black men ¶
+        And the graveyards of the rusted automobiles ¶ § Good morning America,
+        how are you? ¶ Say, don't you know me? I'm your native son ¶ I'm the
+        train they call the City of New Orleans ¶ I'll be gone five hundred
+        miles when the day is done ¶ § Dealin' card games with the old men in
+        the club car ¶ Penny a point ain't no one keepin' score ¶ Pass the paper
+        bag that holds the bottle ¶ Feel the wheels rumblin' 'neath the floor ¶
+        And the sons of pullman porters ¶ And the sons of engineers ¶ Ride their
+        father's magic carpets made of steel ¶ Mothers with their babes asleep ¶
+        Are rockin' to the gentle beat ¶ And the rhythm of the rails is all they
+        feel ¶ § Good morning America, how are you? ¶ Say, don't you know me?
+        I'm your native son ¶ I'm the train they call the City of New Orleans ¶
+        I'll be gone five hundred miles when the day is done ¶ § Nighttime on
+        the City of New Orleans ¶ Changing cars in Memphis, Tennessee ¶ Half way
+        home, we'll be there by morning ¶ Through the Mississippi darkness ¶
+        Rolling down to the sea ¶ But all the towns and people seem ¶ To fade
+        into a bad dream ¶ And the steel rail still ain't heard the news ¶ The
+        conductor sings his songs again ¶ The passengers will please refrain ¶
+        This train got the disappearing railroad blues ¶ § Good night, America,
+        how are you? ¶ Say, don't you know me? I'm your native son ¶ I'm the
+        train they call the City of New Orleans ¶ I'll be gone five hundred
+        miles when the day is done
+      </div>
+    </div>
+    <div class="help">
+      Credit and other information for the
+      <a href="https://en.wikipedia.org/wiki/City_of_New_Orleans_(song)"
+        >City of New Orleans</a
+      >
+      song.
     </div>
     <br />
     <div class="help">Random(ish) Gradient</div>
