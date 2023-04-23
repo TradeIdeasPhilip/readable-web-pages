@@ -94,3 +94,12 @@ div.constant-wave::after {
   position: absolute;
   z-index: -2;
 }
+#randomGradient {
+  overflow-x: auto;
+}
+#antiAliasing {
+  overflow-x: auto;
+}
+canvas {
+  border: lightblue ridge 2px;
+}

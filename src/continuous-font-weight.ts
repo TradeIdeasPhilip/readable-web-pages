@@ -119,21 +119,87 @@ getById("redrawGradient", HTMLButtonElement).addEventListener("click", () =>
     }
   }
   (window as any).drawAntiAliasing = drawAntiAliasing;
+  const antiAliasingMainCanvas = getById(
+    "antiAliasingMainCanvas",
+    HTMLCanvasElement
+  );
+  const antiAliasingDuplicateCanvas = getById(
+    "antiAliasingDuplicateCanvas",
+    HTMLCanvasElement
+  );
+  antiAliasingMainCanvas.getContext("2d")!.imageSmoothingEnabled = false;
+  antiAliasingDuplicateCanvas.getContext("2d")!.imageSmoothingEnabled = false;
   function drawCircle(radius: number) {
     const centerX = width / 2;
     const centerY = height / 2;
     /**
-     * The input radius should always be in a range from 0 to 1.
-     * 1 means as big as the container.  If the container is not a
-     * square I'm (somewhat arbitrarily) picking something half way
-     * between the two dimensions.
+     * antiAliasingDiv.offsetWidth doesn't always give me what I want.  If the window is too
+     * small or the font zoom is too big, I only see the width of the part that's visible on
+     * the screen.
+     */
+    const lastSpanOnTheRight = assertClass(
+      antiAliasingDiv.firstElementChild!.lastElementChild!,
+      HTMLSpanElement
+    );
+    const containerWidthInPixels =
+      lastSpanOnTheRight.offsetLeft + lastSpanOnTheRight.offsetWidth;
+    const containerHeightInPixels = antiAliasingDiv.offsetHeight;
+    /**
+     * The input radius should always be in a range from 0 to 1.  1 means as big as the container.
+     *  If the container is not a square I'm (somewhat arbitrarily) picking the smaller of the two
+     * dimensions.  TODO this is currently unused.  For simplicity I'm drawing an ellipse as big as
+     * the container in both dimensions.
      */
     const maxRadiusInPixels =
-      (antiAliasingDiv.offsetWidth + antiAliasingDiv.offsetHeight) / 4;
-    const characterWidthInPixels = antiAliasingDiv.offsetWidth / width;
-    const characterHeightInPixels = antiAliasingDiv.offsetHeight / height;
-    const characterSizeInPixels =
-      (characterHeightInPixels + characterWidthInPixels) / 2;
+      Math.min(containerHeightInPixels, containerWidthInPixels) / 2;
+    maxRadiusInPixels;
+
+    const characterWidthInPixels = containerWidthInPixels / width;
+    const characterHeightInPixels = containerHeightInPixels / height;
+    const canvasScaleFactor = 6;
+    antiAliasingMainCanvas.width = width;
+    antiAliasingMainCanvas.height = height;
+    antiAliasingMainCanvas.style.width = width * canvasScaleFactor + "px";
+    antiAliasingMainCanvas.style.height = height * canvasScaleFactor + "px";
+    antiAliasingDuplicateCanvas.width = width;
+    antiAliasingDuplicateCanvas.height = height;
+    antiAliasingDuplicateCanvas.style.height =
+      height * canvasScaleFactor + "px";
+    antiAliasingDuplicateCanvas.style.width =
+      ((width * canvasScaleFactor) / characterHeightInPixels) *
+        characterWidthInPixels +
+      "px";
+
+    const mainContext = antiAliasingMainCanvas.getContext("2d")!;
+    mainContext.fillStyle = "#ffffff";
+    mainContext.fillRect(0, 0, width, height);
+    mainContext.beginPath();
+    mainContext.ellipse(
+      centerX,
+      centerY,
+      (width * radius) / 2,
+      (height * radius) / 2,
+      0,
+      0,
+      2 * Math.PI
+    );
+    mainContext.fillStyle = "#000000";
+    mainContext.fill();
+    antiAliasingDuplicateCanvas
+      .getContext("2d")!
+      .drawImage(antiAliasingMainCanvas, 0, 0);
+    const pixelValues = mainContext.getImageData(0, 0, width, height).data;
+    let pixelValueIndex = 0;
+    const pixelValueToFontWeight = makeLinear(0, 900, 255, 200);
+    for (const row of Array.from(antiAliasingDiv.children)) {
+      for (const cell of Array.from(row.children)) {
+        (cell as HTMLElement).style.fontWeight = pixelValueToFontWeight(
+          pixelValues[pixelValueIndex]
+        ).toString();
+        pixelValueIndex += 4;
+      }
+    }
+    /*
     //const characterAspectRatio = characterWidth / characterHeight;
     for (let columnNumber = 0; columnNumber < width; columnNumber++) {
       for (let rowNumber = 0; rowNumber < height; rowNumber++) {
@@ -149,6 +215,7 @@ getById("redrawGradient", HTMLButtonElement).addEventListener("click", () =>
         ).toString();
       }
     }
+    */
   }
   (window as any).drawCircle = drawCircle;
   function startAnimation() {
@@ -160,6 +227,17 @@ getById("redrawGradient", HTMLButtonElement).addEventListener("click", () =>
             Math.sin(ms / 1000) / 2 + 0.5,
             Math.cos(ms / 1000) / 2 + 0.5
           );
+          break;
+        }
+        case "Circles": {
+          const numberOfCycles = ms / 3000;
+          const numberOfCompleteCycles = Math.floor(numberOfCycles);
+          const partOfCurrentCycle = numberOfCycles - numberOfCompleteCycles;
+          if (numberOfCompleteCycles % 2) {
+            drawCircle(partOfCurrentCycle);
+          } else {
+            drawCircle(1 - partOfCurrentCycle);
+          }
           break;
         }
       }

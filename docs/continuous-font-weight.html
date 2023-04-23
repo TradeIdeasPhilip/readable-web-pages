@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Continuous Font Weight</title>
     
-    <script type="module" crossorigin src="./assets/continuousFontWeight-51565799.js"></script>
+    <script type="module" crossorigin src="./assets/continuousFontWeight-abdcc847.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/modulepreload-polyfill-3cfb730f.js">
-    <link rel="modulepreload" crossorigin href="./assets/client-misc-ae02ac99.js">
-    <link rel="stylesheet" href="./assets/continuous-font-weight-3b0ccd78.css">
+    <link rel="modulepreload" crossorigin href="./assets/client-misc-6b99d9da.js">
+    <link rel="stylesheet" href="./assets/continuous-font-weight-e9696fb3.css">
   </head>
   <body>
     <div>
@@ -35,8 +35,25 @@
     <div>|<span style="font-size: 50%"><span style="font-size: 50%;">ZZZZ</span>YY</span>X|</div>
     -->
     <br />
-    <div>Anti-Aliasing</div>
+    <div><a id="anti_aliasing"></a>Anti-Aliasing</div>
     <div id="antiAliasing"></div>
+    <div>
+      <input type="radio" name="antiAliasing" id="Waves" checked /><label
+        for="Waves"
+        >Waves</label
+      >
+      <input type="radio" name="antiAliasing" id="Circles" /><label
+        for="Circles"
+        >Circles</label
+      >
+      <input type="radio" name="antiAliasing" id="Paused" /><label for="Paused"
+        >Paused</label
+      >
+    </div>
+    <div>
+      <canvas id="antiAliasingMainCanvas"></canvas>
+      <canvas id="antiAliasingDuplicateCanvas"></canvas>
+    </div>
     <br />
     <div>Random(ish) Gradient</div>
     <div id="randomGradient"></div>
