@@ -286,6 +286,34 @@ getById("redrawGradient", HTMLButtonElement).addEventListener("click", () =>
     });
   }
   startAnimation();
+  const newTextInput = getById("newText", HTMLInputElement);
+  const loadNowButton = getById("loadNow", HTMLButtonElement);
+  let backgroundString = "X";
+  const updateLoadNowButtonStatus = () =>
+    (loadNowButton.disabled =
+      newTextInput.value == backgroundString || newTextInput.value == "");
+  newTextInput.addEventListener("input", updateLoadNowButtonStatus);
+  loadNowButton.addEventListener("click", () => {
+    backgroundString = newTextInput.value;
+    updateLoadNowButtonStatus();
+    /**
+     * If you try to use [] or .length directly on a string,
+     * some characters, like 🤠, will be split into two pieces.
+     * Array.from() fixes that.
+     */
+    const asArray = Array.from(backgroundString);
+    let stringIndex = 0;
+    for (let row = 0; row < height; row++) {
+      for (let column = 0; column < width; column++) {
+        cells[column][row].innerText = asArray[stringIndex];
+        stringIndex++;
+        if (stringIndex == asArray.length) {
+          stringIndex = 0;
+        }
+      }
+    }
+  });
+  updateLoadNowButtonStatus();
 }
 
 {

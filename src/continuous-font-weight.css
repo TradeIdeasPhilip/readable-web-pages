@@ -116,3 +116,10 @@ canvas {
   display: flex;
   flex-direction: row;
 }
+.new-text-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.new-text-container input {
+  flex-grow: 1;
+}
