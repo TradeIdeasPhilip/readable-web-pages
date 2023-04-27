@@ -12,10 +12,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Internal Table of Contents</title>
     
-    <script type="module" crossorigin src="./assets/unlimitedScroll-b1f8eb4c.js"></script>
+    <script type="module" crossorigin src="./assets/unlimitedScroll-cbb27cd6.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/modulepreload-polyfill-3cfb730f.js">
     <link rel="modulepreload" crossorigin href="./assets/client-misc-6b99d9da.js">
-    <link rel="stylesheet" href="./assets/unlimited-scroll-97b29ebd.css">
+    <link rel="stylesheet" href="./assets/unlimited-scroll-70a5f53d.css">
   </head>
   <body>
     <div id="main">
@@ -33,18 +33,23 @@
         but in a different layout.
       </p>
       <p>
-        This layout includes a scrolling region within another scrolling region.
-        I usually try to avoid that. This is an attempt to make the most of
-        limited space. When my phone is is portrait orientation and I try to
-        read default sized text, it is not practical to have two columns. So
-        instead of putting the table of contents on the left, I'm moving it to
-        the top of the document. And, to save space, the table of contents can
-        never be more than half the screen height, and it will scroll off the
-        screen as you read the main body of the document.
+        This layout includes a single scrolling region. The table of contents
+        and the buttons are in the same scrolling <code>&lt;div&gt;</code> as
+        the title and the body. This is an attempt to make the most of limited
+        space. When my phone is is portrait orientation and I try to read
+        default sized text, it is not practical to have two columns. So instead
+        of putting the table of contents on the left, I'm moving it to the top
+        of the document.
       </p>
       <p>
-        Is this a good layout? I don't know. I'm trying it now for the first
-        time.
+        At one time I had a second scroll bar just for the table of contents. A
+        scroller within a scroller. It didn't help. It's easier to use if the
+        table of contents works just like any other part of the text.
+      </p>
+      <p>
+        In general it's a bad idea to use a scroller inside of another scroller.
+        There are some exceptions, like code samples in a bigger document. But I
+        should have known better in this case.
       </p>
       <p>
         I know that the layout of
@@ -54,6 +59,15 @@
         doesn't work well if the screen is too small or the zoom is too big. In
         those cases we can use this layout or something similar. In any case,
         the change should be <b>all CSS</b>, no JavaScript.
+      </p>
+      <p>
+        I already see an issue with the no JavaScript approach. I want to have
+        just one scrolling component in this layout, but two in the wide layout.
+        It's easy to rearrange a component's children with only CSS rules. But
+        you can't change a component's parent without JavaScript. My plan is to
+        make two copies of the table of contents, and to use the CSS rules to
+        make sure exactly one of them is hidden. I'll still use JavaScript to
+        create the table of contents, so both copies will be identical.
       </p>
       <p>
         Currently I'm building two separate web pages, one for one column layout

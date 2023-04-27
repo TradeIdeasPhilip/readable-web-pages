@@ -26,3 +26,4 @@ I'm just getting some samples together.
 - [Horizontal Scrolling Text](https://tradeideasphilip.github.io/readable-web-pages/top-level.html)
 - [Internal Table of Contents](https://tradeideasphilip.github.io/readable-web-pages/internal-table-of-contents.html)
 - [Layout for Thin Windows](https://tradeideasphilip.github.io/readable-web-pages/unlimited-scroll.html)
+- [Exploring Font Properties](https://tradeideasphilip.github.io/readable-web-pages/continuous-font-weight.html) (A minor tangent.)

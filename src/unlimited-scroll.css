@@ -37,8 +37,8 @@ body {
 #toc {
   /*min-width: 15ch;*/
   margin: 0.8em;
-  max-height: 50vh;
-  overflow-y: auto;
+  /* max-height: 50vh;
+  overflow-y: auto; */
 }
 #main {
   flex-grow: 1;
