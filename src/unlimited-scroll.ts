@@ -110,7 +110,7 @@ Array.from(mainDiv.querySelectorAll(".section, .article, .heading")).forEach(
 );
 
 /**
- * Eventually this should be dynamic.  In case the 
+ * Eventually this should be dynamic.  In case the
  */
 const shouldScrollToc = false;
 
@@ -134,11 +134,20 @@ updateTocSelection();
 
 let fontSize = 0;
 
+const defaultFontSizeButton = getById("defaultFont", HTMLButtonElement);
+
 function setFontSize() {
   const percent = Math.pow(1.15, fontSize) * 100;
   const size = percent + "%";
   document.body.style.fontSize = size;
+  defaultFontSizeButton.disabled = fontSize == 0;
 }
+setFontSize();
+
+defaultFontSizeButton.addEventListener("click", () => {
+  fontSize = 0;
+  setFontSize();
+});
 
 getById("biggerFont", HTMLButtonElement).addEventListener("click", () => {
   fontSize++;

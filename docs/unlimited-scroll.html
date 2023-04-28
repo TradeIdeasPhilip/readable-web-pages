@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Internal Table of Contents</title>
     
-    <script type="module" crossorigin src="./assets/unlimitedScroll-cbb27cd6.js"></script>
+    <script type="module" crossorigin src="./assets/unlimitedScroll-0f0d6adb.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/modulepreload-polyfill-3cfb730f.js">
     <link rel="modulepreload" crossorigin href="./assets/client-misc-6b99d9da.js">
     <link rel="stylesheet" href="./assets/unlimited-scroll-70a5f53d.css">
@@ -21,8 +21,22 @@
     <div id="main">
       <div class="title">The Constitution of the United States</div>
       <div id="toc">
-        <button id="biggerFont"><span style="font-size: 110%">A</span>+</button>
-        <button id="smallerFont"><span style="font-size: 90%">A</span>-</button>
+        <!--
+           I'm seeing some strange stuff.  Setting the defaultFont button's font-size to 100%
+           is the same as not specifying the font size at all.  But setting the font size to 87% made
+           the button just slightly bigger than the default!  I moved to default to the front of
+           the list to make that less obvious.  It does scale.  As I hit the A+ or A- buttons, the
+           size of those two buttons, and the body text, all change, and the defaultFont button's
+           size does not change.  Close enough for now, but I'd like to do better.
+
+           There are similar problems with the A+ button.  When I hit A- once, the A+ button and
+           the defaultFont button should be the same size but they are not even close.
+
+           TODO fix this!
+          -->
+        <button id="defaultFont">A</button>
+        <button id="biggerFont" style="font-size: 115%">A+</button>
+        <button id="smallerFont" style="font-size: 87%">A-</button>
       </div>
       <div class="heading" data-name="forward">Forward to the 2023 Edition</div>
       <p>
