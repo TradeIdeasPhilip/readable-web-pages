@@ -158,3 +158,53 @@ getById("smallerFont", HTMLButtonElement).addEventListener("click", () => {
   fontSize--;
   setFontSize();
 });
+
+const verticalScrollButton = getById("verticalScroll", HTMLButtonElement);
+const horizontalScrollButton = getById("horizontalScroll", HTMLButtonElement);
+
+/**
+ * The control to add scrollbars to.  This should be a `<div>` that contains
+ * another `<div>` that contains a third `<div>`.  The innermost `<div>` has whatever you want to display in the scroller.
+ * The other two `<div>`'s each have exactly one child.
+ *
+ * This will eventually be an input to setScroll()
+ */
+const scrollerTop = getById("main", HTMLDivElement);
+
+function isValidScrollType(input : string | undefined) : input is ("vertical" | "horizontal") {
+  return (input == "vertical") || (input == "horizontal");
+}
+
+/**
+ * Change the scroll type of the control.
+ * @param type Which scrollbar to add.
+ * The default will be some reasonable value.  Perhaps it will be the last value
+ * that the user selected, or something like that.
+ */
+function setScrollType(type?: "vertical" | "horizontal") {
+  if (!isValidScrollType(type)) {
+    const current = scrollerTop.dataset["philScrollType"];
+    if (isValidScrollType(current)) {
+      type = current;
+    } else {
+      type = "vertical";
+    }
+  }
+  scrollerTop.dataset["philScrollType"] = type;
+  verticalScrollButton.disabled = type == "vertical";
+  horizontalScrollButton.disabled = type == "horizontal";
+}
+
+verticalScrollButton.addEventListener("click", () => {
+  setScrollType("vertical");
+});
+
+horizontalScrollButton.addEventListener("click", () => {
+  setScrollType("horizontal");
+});
+
+// Ensure that we are in decent shape.
+// The html file currently has a value set for the scroll type,
+// and currently setScrollType() with no arguments will use that
+// if it is valid.
+setScrollType();

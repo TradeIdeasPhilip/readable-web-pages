@@ -5,5 +5,20 @@
   display: block;
 }
 [data-scroll="normal"] {
-  
+}
+
+[data-test1="normal"] {
+  background-color: aqua;
+}
+[data-test1~="."] {
+  color: blue;
+}
+[data-test1^="."]::after {
+  content: ' matches [data-test1^="."]';
+}
+[data-test1$="."]::before {
+  content: 'matches [data-test1$="."] ';
+}
+[data-test1]:not([data-test1="normal"]) {
+  font-weight: bold;
 }
