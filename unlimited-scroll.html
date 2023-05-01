@@ -10,10 +10,35 @@
       https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events/Pinch_zoom_gestures
     -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Internal Table of Contents</title>
+    <title>Better Scrolling Practices</title>
     <script type="module" src="./src/unlimited-scroll.ts"></script>
   </head>
   <body>
+    <div id="toc-independent" data-phil-scroll-type="vertical">
+      <div>
+        <div>
+          <!-- 
+            Is this overkill?  Maybe I just need a normal div with a vertical scroll bar.
+           -->
+          <button
+            id="biggerFont1"
+            onclick="alert('This is just a placeholder.')"
+          >
+            <span style="font-size: 110%">A</span>+
+          </button>
+          <button
+            id="smallerFont1"
+            onclick="alert('This is just a placeholder.')"
+          >
+            <span style="font-size: 90%">A</span>-
+          </button>
+        </div>
+      </div>
+      <div>
+        Placeholder for the external copy of the table of contents and
+        associated controls.
+      </div>
+    </div>
     <div id="main" data-phil-scroll-type="horizontal">
       <div>
         <div>

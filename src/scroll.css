@@ -4,8 +4,6 @@
   overflow-y: hidden;
   display: block;
 }
-[data-scroll="normal"] {
-}
 
 [data-test1="normal"] {
   background-color: aqua;

@@ -33,13 +33,17 @@ body {
   width: 100vw;
   overflow-x: clip;
   overflow-y: auto;
+  /* For the API docs:  This says how wide to make each column.
+  This only takes effect when in horizontal scrolling mode.
+  This can be set on the top level <div> of a scrolling container.
+  This value should be appropriate for use in the width property of a <div>.
+  This uses the normal variable inheritance rules, so I'm setting a default for the entire body here. */
   --phil-scroll-column-width: 20em;
 }
-#toc {
-  /*min-width: 15ch;*/ /* This will be necessary again when the table of contents gets its own scrollbar. */
+#toc-independent {
+  width: 15ch; /* This is a good default.  The web designer should be able to
+  override this in any number of ways. */
   margin: 0.8em;
-  /* max-height: 50vh;
-  overflow-y: auto; */
 }
 #main {
   flex-grow: 1;
@@ -91,10 +95,16 @@ div[data-phil-scroll-type="horizontal"] > div {
   left: 0;
   bottom: 0;
   width: var(--phil-scroll-column-width);
+  /* max-width is a way to keep the columns from being larger than the page.
+     Right now that's the easy way.
+     One issue is that I'm not getting the margin quite right.
+     This might have to move to JavaScript.
+     It's hard to test right now because the word Constitution is so long!
+     TODO take another look. */
+  max-width: calc(100% - 1.6em);
 }
 
 div[data-phil-scroll-type="horizontal"] > div > div {
-  /* font-style: italic; */ /* This was just a test, to prove that the buttons and CSS selectors were working, before I added the actual scrolling code. */
   column-rule: #eee 0.2em solid;
   width: fit-content;
   height: 100%;
@@ -106,10 +116,6 @@ div[data-phil-scroll-type="horizontal"] > div > div {
   column-count: 1;
 }
 
-div[data-phil-scroll-type="vertical"] > div {
-}
-
 div[data-phil-scroll-type="vertical"] > div > div {
-  /* font-variant: small-caps; */ /* This was just a test, to prove that the buttons and CSS selectors were working, before I added the actual scrolling code. */
   overflow-y: auto;
 }
