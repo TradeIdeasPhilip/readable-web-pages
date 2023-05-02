@@ -32,6 +32,7 @@
           >
             <span style="font-size: 90%">A</span>-
           </button>
+          <button id="oneScrollBar">One Scroll Bar</button>
         </div>
       </div>
     </div>
@@ -39,7 +40,7 @@
       <div>
         <div>
           <div class="title">The Constitution of the United States</div>
-          <div id="toc">
+          <div id="toc-internal">
             <div>
               <!--
            I'm seeing some strange stuff.  Setting the defaultFont button's font-size to 100%
@@ -65,10 +66,12 @@
             <div>
               <!--
                 These buttons don't resize.  They should.  TODO.
+                Aren't there unicode characters for up-down vs left-right?  TODO.⇅⇵⇄⇆
               -->
               Scroll: <button id="verticalScroll">Vertical</button>
               <button id="horizontalScroll">Horizontal</button>
             </div>
+            <div><button id="twoScrollBars">Two Scroll Bars</button></div>
           </div>
           <div class="heading" data-name="forward">
             Forward to the 2023 Edition

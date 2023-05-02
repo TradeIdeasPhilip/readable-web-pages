@@ -3,8 +3,28 @@ export {};
 import { getById } from "phil-lib/client-misc";
 import "./unlimited-scroll.css";
 
-const tocDiv = getById("toc", HTMLDivElement);
+/**
+ * Place the table of contents and the buttons in this control.
+ * This control does __not__ have its own scrollbar.
+ * It will be inside the same scrolling control as the main body.
+ */
+const tocInternalDiv = getById("toc-internal", HTMLDivElement);
+
+/**
+ * This is the control that contains the main body, and sometimes the table of contents.
+ * This is the top level part that includes all the scrolling options.
+ */
 const mainDiv = getById("main", HTMLDivElement);
+
+/**
+ * This control handles the scrolling for the independent version of the the table of contents, `tocIndependentBody`.
+ */
+const tocIndependentDiv = getById("toc-independent", HTMLDivElement);
+
+/**
+ * Place the table of contents and the buttons in this control.
+ * This control will be inside `tocIndependentDiv`, which handles the scrolling.
+ */
 const tocIndependentBody = getById("toc-independent-body", HTMLDivElement);
 
 /*
@@ -87,7 +107,7 @@ Array.from(mainDiv.querySelectorAll(".section, .article, .heading")).forEach(
        * Something like "#Article_II_Section_1".
        */
       const href = "#" + anchorId;
-      for (const container of [tocDiv, tocIndependentBody]) {
+      for (const container of [tocInternalDiv, tocIndependentBody]) {
         /**
          * This is the anchor element we are creating and adding to the table of contents.
          */
@@ -114,7 +134,7 @@ Array.from(mainDiv.querySelectorAll(".section, .article, .heading")).forEach(
 
 function updateTocSelection() {
   const hash = location.hash;
-  [tocDiv, tocIndependentBody].forEach((container) => {
+  [tocInternalDiv, tocIndependentBody].forEach((container) => {
     const shouldScrollToc = container == tocIndependentBody;
     Array.from(container.querySelectorAll("a")).forEach((anchor) => {
       // Note:  anchor.href returns a string with an absolute url.
@@ -211,3 +231,33 @@ horizontalScrollButton.addEventListener("click", () => {
 // and currently setScrollType() with no arguments will use that
 // if it is valid.
 setScrollType();
+
+/**
+ * Make the table of contents scroll with the main body.
+ */
+function chooseOneScrollBar() {
+  tocInternalDiv.style.display = "";
+  tocIndependentDiv.style.display = "none";
+}
+
+/**
+ * Make the table of contents scroll independently of the main body.
+ */
+function chooseTwoScrollBars() {
+  tocInternalDiv.style.display = "none";
+  tocIndependentDiv.style.display = "";
+}
+
+getById("oneScrollBar", HTMLButtonElement).addEventListener("click", () => {
+  chooseOneScrollBar();
+});
+
+getById("twoScrollBars", HTMLButtonElement).addEventListener("click", () => {
+  chooseTwoScrollBars();
+});
+
+// set a default, so we don't see both copies of the table of contents!
+// Ideally this should change with the size of the document.
+// In some cases the window is so narrow we don't have room for a separate TOC, so we always use the one scroll bar option.
+// In other cases there is room and we let the user choose.
+chooseOneScrollBar();
