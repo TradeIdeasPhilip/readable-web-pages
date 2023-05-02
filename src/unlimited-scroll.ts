@@ -155,33 +155,64 @@ updateTocSelection();
 
 let fontSize = 0;
 
-const defaultFontSizeButton = getById("defaultFont", HTMLButtonElement);
+function findButtons(id: string): HTMLButtonElement[] {
+  const result: HTMLButtonElement[] = [];
+  document
+    .querySelectorAll("button[data-phil-button-action]")
+    .forEach((button) => {
+      if (!(button instanceof HTMLButtonElement)) {
+        // The selector should not allow this.  But TypeScript doesn't know that,
+        // so I'm adding test for it.
+        throw new Error("wtf");
+      }
+      // I could have done this test as part of the CSS selector, but then
+      // I'd have to think about escaping special characters!  This way is
+      // just easier.
+      if (button.dataset["philButtonAction"] === id) {
+        result.push(button);
+      }
+    });
+  if (result.length != 2) {
+    // The intent is to have one in each copy of the table of contents.
+    console.warn("expecting 2 buttons", id, result);
+  }
+  return result;
+}
+
+const defaultFontSizeButtons = findButtons("defaultFont");
 
 function setFontSize() {
   const percent = Math.pow(1.15, fontSize) * 100;
   const size = percent + "%";
   document.body.style.fontSize = size;
-  defaultFontSizeButton.disabled = fontSize == 0;
+  const disable = fontSize == 0;
+  defaultFontSizeButtons.forEach((button) => (button.disabled = disable));
 }
 setFontSize();
 
-defaultFontSizeButton.addEventListener("click", () => {
-  fontSize = 0;
-  setFontSize();
+defaultFontSizeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    fontSize = 0;
+    setFontSize();
+  });
 });
 
-getById("biggerFont", HTMLButtonElement).addEventListener("click", () => {
-  fontSize++;
-  setFontSize();
+findButtons("biggerFont").forEach((button) => {
+  button.addEventListener("click", () => {
+    fontSize++;
+    setFontSize();
+  });
 });
 
-getById("smallerFont", HTMLButtonElement).addEventListener("click", () => {
-  fontSize--;
-  setFontSize();
+findButtons("smallerFont").forEach((button) => {
+  button.addEventListener("click", () => {
+    fontSize--;
+    setFontSize();
+  });
 });
 
-const verticalScrollButton = getById("verticalScroll", HTMLButtonElement);
-const horizontalScrollButton = getById("horizontalScroll", HTMLButtonElement);
+const verticalScrollButtons = findButtons("verticalScroll");
+const horizontalScrollButtons = findButtons("horizontalScroll");
 
 /**
  * The control to add scrollbars to.  This should be a `<div>` that contains
@@ -214,16 +245,24 @@ function setScrollType(type?: "vertical" | "horizontal") {
     }
   }
   scrollerTop.dataset["philScrollType"] = type;
-  verticalScrollButton.disabled = type == "vertical";
-  horizontalScrollButton.disabled = type == "horizontal";
+  verticalScrollButtons.forEach((button) => {
+    button.disabled = type == "vertical";
+  });
+  horizontalScrollButtons.forEach((button) => {
+    button.disabled = type == "horizontal";
+  });
 }
 
-verticalScrollButton.addEventListener("click", () => {
-  setScrollType("vertical");
+verticalScrollButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    setScrollType("vertical");
+  });
 });
 
-horizontalScrollButton.addEventListener("click", () => {
-  setScrollType("horizontal");
+horizontalScrollButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    setScrollType("horizontal");
+  });
 });
 
 // Ensure that we are in decent shape.

@@ -20,19 +20,31 @@
           <!-- 
             Is this overkill?  Maybe I just need a normal div with a vertical scroll bar.
            -->
-          <button
-            id="biggerFont1"
-            onclick="alert('This is just a placeholder.')"
-          >
-            <span style="font-size: 110%">A</span>+
-          </button>
-          <button
-            id="smallerFont1"
-            onclick="alert('This is just a placeholder.')"
-          >
-            <span style="font-size: 90%">A</span>-
-          </button>
-          <button id="oneScrollBar">One Scroll Bar</button>
+          <div>
+            <button data-phil-button-action="defaultFont">A</button>
+            <button
+              data-phil-button-action="biggerFont"
+              style="font-size: 115%"
+            >
+              A+
+            </button>
+            <button
+              data-phil-button-action="smallerFont"
+              style="font-size: 87%"
+            >
+              A-
+            </button>
+          </div>
+          <div>
+            Scroll:
+            <button data-phil-button-action="verticalScroll">Vertical</button>
+            <button data-phil-button-action="horizontalScroll">
+              Horizontal
+            </button>
+          </div>
+          <div>
+            <button id="oneScrollBar">One Scroll Bar</button>
+          </div>
         </div>
       </div>
     </div>
@@ -53,23 +65,36 @@
            There are similar problems with the A+ button.  When I hit A- once, the A+ button and
            the defaultFont button should be the same size but they are not even close.
 
-           TODO fix this!
+           TODO fix this!  And notice that there are two copies of this!
 
            TODO Test the 3 sizes of buttons on the phone.  Notice the @media (pointer: coarse)
            rule in unlimited-scroll.css.  Maybe that rule needs to change the min-height of the
            button instead of the font-size.  So there's no conflict.  TEST it.
           -->
-              <button id="defaultFont">A</button>
-              <button id="biggerFont" style="font-size: 115%">A+</button>
-              <button id="smallerFont" style="font-size: 87%">A-</button>
+              <button data-phil-button-action="defaultFont">A</button>
+              <button
+                data-phil-button-action="biggerFont"
+                style="font-size: 115%"
+              >
+                A+
+              </button>
+              <button
+                data-phil-button-action="smallerFont"
+                style="font-size: 87%"
+              >
+                A-
+              </button>
             </div>
             <div>
               <!--
-                These buttons don't resize.  They should.  TODO.
+                These buttons don't resize.  They should.  TODO.  And fix the duplicate of these buttons, too!
                 Aren't there unicode characters for up-down vs left-right?  TODO.⇅⇵⇄⇆
               -->
-              Scroll: <button id="verticalScroll">Vertical</button>
-              <button id="horizontalScroll">Horizontal</button>
+              Scroll:
+              <button data-phil-button-action="verticalScroll">Vertical</button>
+              <button data-phil-button-action="horizontalScroll">
+                Horizontal
+              </button>
             </div>
             <div><button id="twoScrollBars">Two Scroll Bars</button></div>
           </div>
