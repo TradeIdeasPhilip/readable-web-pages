@@ -39,11 +39,15 @@ body {
   This value should be appropriate for use in the width property of a <div>.
   This uses the normal variable inheritance rules, so I'm setting a default for the entire body here. */
   --phil-scroll-column-width: 20em;
+  background-color: #f8f7f8;
 }
 #toc-independent {
   width: 15ch; /* This is a good default.  The web designer should be able to
   override this in any number of ways. */
-  margin: 0.8em;
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+  margin-left: 0.8em;
+  margin-right: 0;
 }
 #main {
   flex-grow: 1;
@@ -83,6 +87,10 @@ body {
   }
 }
 
+div[data-phil-scroll-type] {
+  background-color: white;
+}
+
 div[data-phil-scroll-type="horizontal"] {
   position: relative;
   /*margin: 1em;*/
@@ -114,6 +122,10 @@ div[data-phil-scroll-type="horizontal"] > div > div {
   box-sizing: border-box;
   column-gap: 2em;
   column-count: 1;
+}
+
+div[data-phil-scroll-type="vertical"] {
+  overflow-y: scroll;
 }
 
 div[data-phil-scroll-type="vertical"] > div > div {
