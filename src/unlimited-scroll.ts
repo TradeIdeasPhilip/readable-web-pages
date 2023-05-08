@@ -116,17 +116,17 @@ Array.from(mainDiv.querySelectorAll(".section, .article, .heading")).forEach(
         tocA.classList.add(tocClass);
         tocA.href = href;
         container.appendChild(tocA);
-        const destinationA = document.createElement("a");
-        destinationA.id = anchorId;
-        destinationA.href = href;
-        destinationA.className = "self-pointer";
-        element.parentElement!.insertBefore(destinationA, element);
-        destinationA.appendChild(element);
-        if (href == initiallyRequestedHash) {
-          // This is not automatic because the browser tries to scroll into view before we've created the <a>.
-          // We simulate it and the user won't know the difference.
-          destinationA.scrollIntoView();
-        }
+      }
+      const destinationA = document.createElement("a");
+      destinationA.id = anchorId;
+      destinationA.href = href;
+      destinationA.className = "self-pointer";
+      element.parentElement!.insertBefore(destinationA, element);
+      destinationA.appendChild(element);
+      if (href == initiallyRequestedHash) {
+        // This is not automatic because the browser tries to scroll into view before we've created the <a>.
+        // We simulate it and the user won't know the difference.
+        destinationA.scrollIntoView();
       }
     }
   }
