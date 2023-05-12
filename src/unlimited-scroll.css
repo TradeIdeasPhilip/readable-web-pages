@@ -77,6 +77,10 @@ body {
 .toc-selected {
   background-color: lightcyan;
 }
+/* A section title (e.g. <h1> or <h2>) is often an anchor that points to itself.
+ * That way a user can click on a section title and the url field will update
+ * to point to that line.  It makes it easy for a user to share a url pointing
+ * to a specific <a>. */
 .self-pointer {
   color: var(--foreground-color);
   background-color: var(--background-color);
@@ -142,14 +146,22 @@ div[data-phil-scroll-type="vertical"] > div > div {
   overflow-y: auto;
 }
 
+/* If there is no room to add the second section with its own scroll bar, then
+ * hide the button which could ask for that section. */
 [data-allow-two-scrollbars="0"] #twoScrollBars {
   display: none;
 }
 
+/* The screen is wide enough to support two scroll bars and the user has requested two scroll bars so we hide the internal
+ * table of contents and only display the independent one, the one that has it's own scroll bar. */
 [data-allow-two-scrollbars="1"][data-scrollbar-count="2"] #toc-internal {
   display: none;
 }
 
+/* We only want to display one scroll bar.  This is the complement of the rule above.
+ * In this case we hide the independent table of contents, because it would create
+ * its own scroll bar.  We leave the internal table of contents, which shares a
+ * scroll bar with the body. */
 [data-allow-two-scrollbars="0"] #toc-independent,
 [data-scrollbar-count="1"] #toc-independent {
   display: none;
