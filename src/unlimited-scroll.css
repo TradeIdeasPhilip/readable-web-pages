@@ -95,6 +95,12 @@ div[data-phil-scroll-type] {
   background-color: white;
 }
 
+div[data-phil-scroll-type] p {
+  text-align: justify;
+  text-indent: 3ch;
+  margin: 0.25em 0;
+}
+
 div[data-phil-scroll-type="horizontal"] {
   position: relative;
   /*margin: 1em;*/
