@@ -141,3 +141,16 @@ div[data-phil-scroll-type="vertical"] {
 div[data-phil-scroll-type="vertical"] > div > div {
   overflow-y: auto;
 }
+
+[data-allow-two-scrollbars="0"] #twoScrollBars {
+  display: none;
+}
+
+[data-allow-two-scrollbars="1"][data-scrollbar-count="2"] #toc-internal {
+  display: none;
+}
+
+[data-allow-two-scrollbars="0"] #toc-independent,
+[data-scrollbar-count="1"] #toc-independent {
+  display: none;
+}

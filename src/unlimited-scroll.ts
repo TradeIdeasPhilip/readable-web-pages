@@ -17,13 +17,8 @@ const tocInternalDiv = getById("toc-internal", HTMLDivElement);
 const mainDiv = getById("main", HTMLDivElement);
 
 /**
- * This control handles the scrolling for the independent version of the the table of contents, `tocIndependentBody`.
- */
-const tocIndependentDiv = getById("toc-independent", HTMLDivElement);
-
-/**
  * Place the table of contents and the buttons in this control.
- * This control will be inside `tocIndependentDiv`, which handles the scrolling.
+ * This control will be inside `#toc-independent`, which handles the scrolling.
  */
 const tocIndependentBody = getById("toc-independent-body", HTMLDivElement);
 
@@ -275,16 +270,20 @@ setScrollType();
  * Make the table of contents scroll with the main body.
  */
 function chooseOneScrollBar() {
-  tocInternalDiv.style.display = "";
-  tocIndependentDiv.style.display = "none";
+  // TODO this and probably every reference to body should probably go to a new div.
+  // That will make more sense when I package this better as a reusable library.
+  document.body.dataset.scrollbarCount = "1";
+  //tocInternalDiv.style.display = "";
+  //tocIndependentDiv.style.display = "none";
 }
 
 /**
  * Make the table of contents scroll independently of the main body.
  */
 function chooseTwoScrollBars() {
-  tocInternalDiv.style.display = "none";
-  tocIndependentDiv.style.display = "";
+  document.body.dataset.scrollbarCount = "2";
+  //tocInternalDiv.style.display = "none";
+  //tocIndependentDiv.style.display = "";
 }
 
 getById("oneScrollBar", HTMLButtonElement).addEventListener("click", () => {
@@ -300,3 +299,14 @@ getById("twoScrollBars", HTMLButtonElement).addEventListener("click", () => {
 // In some cases the window is so narrow we don't have room for a separate TOC, so we always use the one scroll bar option.
 // In other cases there is room and we let the user choose.
 chooseOneScrollBar();
+
+{
+  const matcher = matchMedia("(min-width: 30em)");
+  const update = () => {
+    const allowed = matcher.matches ? "1" : "0";
+    document.body.dataset.allowTwoScrollbars = allowed;
+    console.log(`data-allow-two-scrollbars="${allowed}"`);
+  };
+  update();
+  matcher.addEventListener("change", update);
+}
