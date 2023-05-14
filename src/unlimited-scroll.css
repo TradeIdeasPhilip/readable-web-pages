@@ -146,23 +146,43 @@ div[data-phil-scroll-type="vertical"] > div > div {
   overflow-y: auto;
 }
 
-/* If there is no room to add the second section with its own scroll bar, then
- * hide the button which could ask for that section. */
-[data-allow-two-scrollbars="0"] #twoScrollBars {
-  display: none;
+.phil-double-scroll-container {
+  container-type: size;
+  container-name: phil-double-scroll-container;
 }
 
-/* The screen is wide enough to support two scroll bars and the user has requested two scroll bars so we hide the internal
- * table of contents and only display the independent one, the one that has it's own scroll bar. */
-[data-allow-two-scrollbars="1"][data-scrollbar-count="2"] #toc-internal {
-  display: none;
+@container phil-double-scroll-container (width <= 32em) {
+  /* allow-two-scrollbars="0" */
+  /*
+  p {
+    font-family: cursive;
+  } 
+  */
+  #twoScrollBars {
+    display: none;
+  }
+  #toc-independent {
+    display: none;
+  }
 }
 
-/* We only want to display one scroll bar.  This is the complement of the rule above.
- * In this case we hide the independent table of contents, because it would create
- * its own scroll bar.  We leave the internal table of contents, which shares a
- * scroll bar with the body. */
-[data-allow-two-scrollbars="0"] #toc-independent,
 [data-scrollbar-count="1"] #toc-independent {
   display: none;
+}
+
+@container phil-double-scroll-container (width > 32em) {
+  /* allow-two-scrollbars="1" */
+  /*
+  p {
+    text-decoration: magenta wavy underline;
+  }
+  */
+  [data-scrollbar-count="2"] #toc-internal {
+    display: none;
+  }
+}
+
+.phil-direction-scroll-container {
+  container-type: size;
+  container-name: phil-direction-scroll-container;
 }

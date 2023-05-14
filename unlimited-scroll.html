@@ -13,7 +13,7 @@
     <title>Better Scrolling Practices</title>
     <script type="module" src="./src/unlimited-scroll.ts"></script>
   </head>
-  <body>
+  <body class="phil-double-scroll-container">
     <div id="toc-independent" data-phil-scroll-type="vertical">
       <div>
         <div id="toc-independent-body">
@@ -48,7 +48,11 @@
         </div>
       </div>
     </div>
-    <div id="main" data-phil-scroll-type="horizontal">
+    <div
+      id="main"
+      data-phil-scroll-type="horizontal"
+      class="phil-direction-scroll-container"
+    >
       <div>
         <div>
           <div class="title">The Constitution of the United States</div>

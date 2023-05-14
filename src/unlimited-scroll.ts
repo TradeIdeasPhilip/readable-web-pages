@@ -1,5 +1,3 @@
-export {};
-
 import { getById } from "phil-lib/client-misc";
 import "./unlimited-scroll.css";
 
@@ -299,39 +297,3 @@ getById("twoScrollBars", HTMLButtonElement).addEventListener("click", () => {
 // In some cases the window is so narrow we don't have room for a separate TOC, so we always use the one scroll bar option.
 // In other cases there is room and we let the user choose.
 chooseOneScrollBar();
-
-{
-  /**
-   * Use this to monitor when we can or cannot show a second scrollbar.
-   * 
-   * This could all be done in css, no JavaScript.  However, that seemed
-   * more complicated.  If I did this media query in css, I could set
-   * a `--` variable or any other element of style.  It's easy to read
-   * the value out of a variable later, but it's a pain to make a selector
-   * which references the variable.
-   * 
-   * Ideally this would be done in the library and not in the main
-   * program.  And ideally this would be attached to a specific `div`
-   * containing the text, not the entire document.  But I don't know how
-   * to do either of those.  I can monitor a `<div>` and get callbacks
-   * when that `div`'s size changes, but this media query also monitors
-   * changes to the font size. 
-   * 
-   * BUG:  This does not adjust to the size of the font.  TODO find a
-   * better way.  Consider using a MutationObserver
-   * https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe
-   * watching for changes to the font and a ResizeObserver
-   * https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver
-   * Watch the element that holds the external table of contents and
-   * the body.  In this example it's the `<body>` element, but that won't
-   * always be the case. 
-   */
-  const matcher = matchMedia("(min-width: 30em)");
-  const update = () => {
-    const allowed = matcher.matches ? "1" : "0";
-    document.body.dataset.allowTwoScrollbars = allowed;
-    console.log(`data-allow-two-scrollbars="${allowed}"`);
-  };
-  update();
-  matcher.addEventListener("change", update);
-}
