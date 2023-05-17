@@ -204,9 +204,6 @@ findButtons("smallerFont").forEach((button) => {
   });
 });
 
-const verticalScrollButtons = findButtons("verticalScroll");
-const horizontalScrollButtons = findButtons("horizontalScroll");
-
 /**
  * The control to add scrollbars to.  This should be a `<div>` that contains
  * another `<div>` that contains a third `<div>`.  The innermost `<div>` has whatever you want to display in the scroller.
@@ -221,48 +218,6 @@ function isValidScrollType(
 ): input is "vertical" | "horizontal" {
   return input == "vertical" || input == "horizontal";
 }
-
-/**
- * Change the scroll type of the control.
- * @param type Which scrollbar to add.
- * The default will be some reasonable value.  Perhaps it will be the last value
- * that the user selected, or something like that.
- */
-function setScrollType(type?: "vertical" | "horizontal") {
-  if (!isValidScrollType(type)) {
-    const current = scrollerTop.dataset["philScrollType"];
-    if (isValidScrollType(current)) {
-      type = current;
-    } else {
-      type = "vertical";
-    }
-  }
-  scrollerTop.dataset["philScrollType"] = type;
-  verticalScrollButtons.forEach((button) => {
-    button.disabled = type == "vertical";
-  });
-  horizontalScrollButtons.forEach((button) => {
-    button.disabled = type == "horizontal";
-  });
-}
-
-verticalScrollButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    setScrollType("vertical");
-  });
-});
-
-horizontalScrollButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    setScrollType("horizontal");
-  });
-});
-
-// Ensure that we are in decent shape.
-// The html file currently has a value set for the scroll type,
-// and currently setScrollType() with no arguments will use that
-// if it is valid.
-setScrollType();
 
 /**
  * Make the table of contents scroll with the main body.

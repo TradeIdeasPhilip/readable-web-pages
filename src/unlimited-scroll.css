@@ -38,6 +38,10 @@ body {
   This can be set on the top level <div> of a scrolling container.
   This value should be appropriate for use in the width property of a <div>.
   This uses the normal variable inheritance rules, so I'm setting a default for the entire body here. */
+  /* This variable should probably go away.  The change between vertical
+   * and horizontal scrolling is based on a container query.  And you
+   * can't use a variable in that case.  So I have to manually keep these
+   * values in sync. */
   --phil-scroll-column-width: 20em;
   background-color: #f8f7f8;
 }
@@ -95,55 +99,65 @@ body {
   }
 }
 
-div[data-phil-scroll-type] {
+div.phil-direction-scroll-container > div {
   background-color: white;
 }
 
-div[data-phil-scroll-type] p {
+div.phil-direction-scroll-container > div p {
   text-align: justify;
   text-indent: 3ch;
   margin: 0.25em 0;
 }
 
-div[data-phil-scroll-type="horizontal"] {
-  position: relative;
-  /*margin: 1em;*/
-  overflow-x: scroll;
-}
-
-div[data-phil-scroll-type="horizontal"] > div {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: var(--phil-scroll-column-width);
-  /* max-width is a way to keep the columns from being larger than the page.
-     Right now that's the easy way.
-     One issue is that I'm not getting the margin quite right.
-     This might have to move to JavaScript.
-     It's hard to test right now because the word Constitution is so long!
-     TODO take another look. */
-  max-width: calc(100% - 1.6em);
-}
-
-div[data-phil-scroll-type="horizontal"] > div > div {
-  column-rule: #f8f7f8 0.2em solid;
-  width: fit-content;
-  height: 100%;
-  max-height: 100%;
-  overflow: visible;
-  position: absolute;
-  box-sizing: border-box;
-  column-gap: 2em;
-  column-count: 1;
-}
-
-div[data-phil-scroll-type="vertical"] {
-  overflow-y: scroll;
-}
-
-div[data-phil-scroll-type="vertical"] > div > div {
+.phil-direction-scroll-container {
+  container-type: size;
+  container-name: phil-direction-scroll-container;
   overflow-y: auto;
+}
+
+@container phil-direction-scroll-container (width > 30em) {
+  /* horizontal scrolling */
+
+  div.phil-direction-scroll-container > div {
+    position: relative;
+    /*margin: 1em;*/
+    overflow-x: scroll;
+    height: 100%;
+  }
+
+  div.phil-direction-scroll-container > div > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--phil-scroll-column-width);
+  }
+
+  div.phil-direction-scroll-container > div > div > div {
+    column-rule: #f8f7f8 0.2em solid;
+    width: fit-content;
+    height: 100%;
+    max-height: 100%;
+    overflow: visible;
+    position: absolute;
+    box-sizing: border-box;
+    column-gap: 2em;
+    column-count: 1;
+  }
+}
+
+@container phil-direction-scroll-container (width <= 30em) {
+  /* vertical scrolling */
+
+  /*
+  div.phil-direction-scroll-container > div {
+    overflow-y: scroll;
+  }
+
+  div.phil-direction-scroll-container > div > div > div {
+    overflow-y: auto;
+  }
+*/
 }
 
 .phil-double-scroll-container {
@@ -180,9 +194,4 @@ div[data-phil-scroll-type="vertical"] > div > div {
   [data-scrollbar-count="2"] #toc-internal {
     display: none;
   }
-}
-
-.phil-direction-scroll-container {
-  container-type: size;
-  container-name: phil-direction-scroll-container;
 }
