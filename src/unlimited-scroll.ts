@@ -205,21 +205,6 @@ findButtons("smallerFont").forEach((button) => {
 });
 
 /**
- * The control to add scrollbars to.  This should be a `<div>` that contains
- * another `<div>` that contains a third `<div>`.  The innermost `<div>` has whatever you want to display in the scroller.
- * The other two `<div>`'s each have exactly one child.
- *
- * This will eventually be an input to setScroll()
- */
-const scrollerTop = getById("main", HTMLDivElement);
-
-function isValidScrollType(
-  input: string | undefined
-): input is "vertical" | "horizontal" {
-  return input == "vertical" || input == "horizontal";
-}
-
-/**
  * Make the table of contents scroll with the main body.
  */
 function chooseOneScrollBar() {

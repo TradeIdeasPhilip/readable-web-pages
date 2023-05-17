@@ -87,61 +87,37 @@
               Forward to the 2023 Edition
             </div>
             <p>
-              This sample shows the same information as
-              <a href="./internal-table-of-contents.html"
-                >internal-table-of-contents.html</a
-              >
-              but in a different layout.
+              This pages demonstrates simple solutions to a common problem.
+              I have a lot of text with only simple formatting.
+              I want to display it in the most readable way regardless of the user's device
+              size or orientation or the user's preferred font size.
             </p>
             <p>
-              This layout includes a single scrolling region. The table of
-              contents and the buttons are in the same scrolling
-              <code>&lt;div&gt;</code> as the title and the body. This is an
-              attempt to make the most of limited space. When my phone is is
-              portrait orientation and I try to read default sized text, it is
-              not practical to have two columns. So instead of putting the table
-              of contents on the left, I'm moving it to the top of the document.
+              The text includes headings and subheadings, and the code automatically generates a table of contents.               
+              If there is room the user has the option to display a table of contents to the left of the main body,
+              and the table of contents will have it's own scroll bar.
+              If there is not room or the user disables the separate table of contents,
+              the the table of contents will be displayed with the body of the text, and controlled by the same scrollbar.
             </p>
             <p>
-              Click the button for <i>vertical</i> scrolling to see the layout
-              that works well with a phone in portrait orientation and other
-              thin environments. Click the button for
-              <i>horizontal</i> scrolling to see a layout for wide environments.
-              I plan to make the horizontal version look more like
-              <a href="./internal-table-of-contents.html"
-                >internal-table-of-contents.html</a
-              >. In particular notice that the other page keeps the table of
-              contents visible at all times and gives it it's own scrollbar.
+              We have two ways to display the main body, depending on how much horizontal space we have.
+              If the space is limited, we display the body in a single column, with a vertical scrollbar.
+              However, text can be hard to read if the columns are too wide.
+              So if the text gets too wide, we automatically switch to multiple columns, and a horizontal scroll bar.
             </p>
             <p>
-              Those two buttons are only changing a css property. You could
-              change that other ways. In particular, if the device is or becomes
-              too small, it might always go into vertical mode. If the device is
-              wide, the program might automatically change to columns, or it
-              might just give the user the option at that time.
+              There are other buttons to make the font size bigger or smaller.
+              A third button will restore the default font size.
+              The buttons will automatically be bigger on a touch device (like a phone)
+              and smaller on a device with a mouse (like a laptop).
             </p>
             <p>
-              At one time I had a second scroll bar just for the table of
-              contents. A scroller within a scroller. It didn't help. It's
-              easier to use if the table of contents works just like any other
-              part of the text.
+              This version of the document will take the entire space of the window.
+              However, that is not required.
+              This container should be available as a widget, so you can add it to any page any way you like.
             </p>
             <p>
-              In general it's a bad idea to use a scroller inside of another
-              scroller. There are some exceptions, like code samples in a bigger
-              document. But I should have known better in this case.
-            </p>
-            <p>
-              I know that the layout of
-              <a href="./internal-table-of-contents.html"
-                >internal-table-of-contents.html</a
-              >
-              doesn't work well if the screen is too small or the zoom is too
-              big. In those cases we can use this layout or something similar.
-              In any case, the change should be <b>all CSS</b>, no JavaScript.
-            </p>
-            <p>
-              I already see an issue with the no JavaScript approach. I want to
+              Implementation note: I already see an issue with the no JavaScript approach. I want to
               have just one scrolling component in this layout, but two in the
               wide layout. It's easy to rearrange a component's children with
               only CSS rules. But you can't change a component's parent without
@@ -149,11 +125,6 @@
               contents, and to use the CSS rules to make sure exactly one of
               them is hidden. I'll still use JavaScript to create the table of
               contents, so both copies will be identical.
-            </p>
-            <p>
-              Currently I'm building two separate web pages, one for one column
-              layout and one for two column layout. The idea is to get each one
-              right on it's own before trying to merge them.
             </p>
             <p>
               What should I do with the controls? It seemed reasonable to let
